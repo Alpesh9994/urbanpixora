@@ -1,0 +1,7 @@
+@use 'styles/variables' as *;
+
+// Hero is full-viewport height with its own top padding baked in.
+// .app-shell has no padding-top; the fixed header overlays transparently.
+.app-shell {
+    min-height: 100vh;
+}

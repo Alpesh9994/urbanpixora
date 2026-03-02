@@ -1,0 +1,95 @@
+<!-- ─── DARK HERO ─────────────────────────────────────── -->
+<section class="page-hero">
+    <div class="page-hero__bg" aria-hidden="true">
+        <svg viewBox="0 0 1200 580" fill="none">
+            <polygon points="820,0 1200,0 1200,260 1050,340 800,110" stroke="rgba(245,166,35,0.09)" stroke-width="1"
+                fill="none" />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="page-hero__breadcrumb">
+            <a routerLink="/">Home</a><span>/</span><span>Contact</span>
+        </div>
+        <div class="page-hero__inner">
+            <h1 class="page-hero__heading">
+                Let's Build<br><em>Something</em> Together
+            </h1>
+            <p class="page-hero__sub">
+                Have a project in mind? Fill in the form or reach out directly —
+                we respond within 24 hours.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACT BODY — LIGHT ─────────────────────────── -->
+<section class="contact-body">
+    <div class="container">
+        <div class="contact-grid">
+
+            <!-- Form left -->
+            <div class="contact-form-wrap" scrollReveal revealFrom="left">
+                @if (!submitted()) {
+                <form class="form" (submit)="onSubmit($event)" novalidate>
+                    <h3 class="form__heading">Send a Message</h3>
+                    <div class="form__row">
+                        <div class="form__field">
+                            <label class="form__label" for="cf-name">Your Name *</label>
+                            <input id="cf-name" class="form__input" type="text" placeholder="Jayram Desai"
+                                [value]="name()" (input)="name.set($any($event.target).value)" required />
+                        </div>
+                        <div class="form__field">
+                            <label class="form__label" for="cf-email">Email Address *</label>
+                            <input id="cf-email" class="form__input" type="email" placeholder="hello@you.com"
+                                [value]="email()" (input)="email.set($any($event.target).value)" required />
+                        </div>
+                    </div>
+                    <div class="form__field">
+                        <label class="form__label" for="cf-subject">Subject</label>
+                        <input id="cf-subject" class="form__input" type="text" placeholder="What's this about?"
+                            [value]="subject()" (input)="subject.set($any($event.target).value)" />
+                    </div>
+                    <div class="form__field">
+                        <label class="form__label" for="cf-msg">Tell us about your project *</label>
+                        <textarea id="cf-msg" class="form__textarea" rows="6"
+                            placeholder="Give us as much detail as you'd like..." [value]="message()"
+                            (input)="message.set($any($event.target).value)" required></textarea>
+                    </div>
+                    <button class="form__submit" type="submit">
+                        Send Message <span>→</span>
+                    </button>
+                </form>
+                } @else {
+                <div class="form__success">
+                    <div class="form__success-icon">✓</div>
+                    <h3>Message Sent!</h3>
+                    <p>Thanks for reaching out. We'll get back to you within 24 hours.</p>
+                </div>
+                }
+            </div>
+
+            <!-- Info right -->
+            <aside class="contact-info" scrollReveal revealFrom="right" [revealDelay]="130">
+                <h3 class="contact-info__heading">Contact Information</h3>
+                @for (item of info; track item.label) {
+                <div class="contact-info__item">
+                    <span class="contact-info__icon">{{ item.icon }}</span>
+                    <div>
+                        <p class="contact-info__label">{{ item.label }}</p>
+                        <p class="contact-info__value">{{ item.value }}</p>
+                    </div>
+                </div>
+                }
+                <div class="contact-info__social">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link">LinkedIn ↗</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link">Instagram ↗</a>
+                    <a href="https://behance.net" target="_blank" rel="noopener" class="social-link">Behance ↗</a>
+                    <a href="https://dribbble.com" target="_blank" rel="noopener" class="social-link">Dribbble ↗</a>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+</section>
+
+<app-footer />

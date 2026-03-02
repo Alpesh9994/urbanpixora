@@ -1,0 +1,142 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+$lt-bg: #f7f7f5;
+$lt-text: #0e0e0e;
+$lt-muted: #777;
+$lt-border: rgba(0, 0, 0, 0.09);
+
+.about-story {
+    padding: 120px 0;
+    background: $lt-bg;
+}
+
+.about-story__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-xxl;
+    align-items: start;
+
+    @include respond-lg {
+        grid-template-columns: 1fr 360px;
+        gap: 80px;
+    }
+}
+
+.about-story__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-md;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.about-story__heading {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.12;
+    color: $lt-text;
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: rgba($lt-text, 0.35);
+    }
+}
+
+.about-story__body {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $lt-muted;
+    margin: 0 0 $space-md;
+}
+
+.about-story__milestones {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    margin-top: $space-xl;
+    padding-top: $space-xl;
+    border-top: 1px solid $lt-border;
+}
+
+.about-story__milestone {
+    display: flex;
+    align-items: center;
+    gap: $space-lg;
+}
+
+.about-story__milestone-year {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    min-width: 44px;
+}
+
+.about-story__milestone-text {
+    font-size: $font-size-sm;
+    color: $lt-muted;
+}
+
+// Stat cards stack
+.about-story__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-sm;
+}
+
+.about-story__stat-card {
+    background: #fff;
+    border: 1px solid $lt-border;
+    border-radius: $radius-lg;
+    padding: $space-xl $space-lg;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+        transform: translateY(-3px);
+    }
+
+    &--accent {
+        background: $color-accent;
+
+        .about-story__stat-val {
+            color: #000;
+        }
+
+        .about-story__stat-lbl {
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}
+
+.about-story__stat-val {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    line-height: 1;
+}
+
+.about-story__stat-lbl {
+    font-size: $font-size-xs;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $lt-muted;
+}

@@ -1,0 +1,86 @@
+@if (menuState.isOpen()) {
+<div class="nav-overlay" @overlayAnim>
+
+    <!-- Brand top-left -->
+    <a class="nav-overlay__brand" href="/" aria-label="UrbanPixora home" (click)="menuState.close()">
+        <svg viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg" height="28" aria-hidden="true">
+            <path d="M4 4v16a8 8 0 0 0 16 0V4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="36" cy="16" r="5" stroke="currentColor" stroke-width="2.5" />
+            <line x1="31" y1="4" x2="31" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+            <text x="48" y="21" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="currentColor"
+                letter-spacing="0.5">rbanPixora</text>
+        </svg>
+    </a>
+
+    <!-- Close button top-right -->
+    <button class="nav-overlay__close" (click)="menuState.close()" aria-label="Close menu">✕</button>
+
+    <!-- Geometric shapes background (top-right area) -->
+    <div class="nav-overlay__shapes" aria-hidden="true">
+        <svg viewBox="0 0 700 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="150,10 350,40 380,180 220,260 60,180" stroke="rgba(255,255,255,0.07)" stroke-width="1"
+                fill="none" />
+            <polygon points="250,0 480,60 500,220 320,300 140,200" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                fill="none" />
+            <polygon points="380,30 600,80 640,240 440,340 250,230" stroke="rgba(255,255,255,0.04)" stroke-width="1"
+                fill="none" />
+            <polygon points="320,100 560,40 680,200 560,380 320,360" stroke="rgba(255,255,255,0.04)" stroke-width="1"
+                fill="none" />
+        </svg>
+    </div>
+
+    <!-- Content: two columns -->
+    <div class="nav-overlay__body">
+
+        <!-- Left: Primary nav -->
+        <nav class="nav-overlay__primary" role="navigation" aria-label="Main navigation">
+            @for (link of navLinks; track link.path) {
+            <a class="nav-overlay__link" [class.is-active]="isActive(link.path)" [routerLink]="link.path"
+                (click)="menuState.close()" @itemAnim>
+                {{ link.label }}
+            </a>
+            }
+        </nav>
+
+        <!-- Right: Utility columns -->
+        <aside class="nav-overlay__aside" @itemAnim>
+
+            <!-- Useful links -->
+            <div class="nav-overlay__util">
+                <p class="nav-overlay__util-title">Useful links</p>
+                <a class="nav-overlay__util-link" routerLink="/privacy" (click)="menuState.close()">Privacy Policy</a>
+                <a class="nav-overlay__util-link" routerLink="/terms" (click)="menuState.close()">Terms and
+                    Conditions</a>
+                <a class="nav-overlay__util-link" routerLink="/cookies" (click)="menuState.close()">Cookie Policy</a>
+                <a class="nav-overlay__util-link" routerLink="/careers" (click)="menuState.close()">Careers</a>
+            </div>
+
+            <hr class="nav-overlay__divider" />
+
+            <!-- Office addresses -->
+            <div class="nav-overlay__offices">
+                <div class="nav-overlay__office">
+                    <p class="nav-overlay__office-city">Ahmedabad</p>
+                    <p class="nav-overlay__office-name">UrbanPixora</p>
+                    <p class="nav-overlay__office-addr">
+                        A 307, Titanium Business Park,<br>
+                        Makarba, Ahmedabad Gujarat,<br>
+                        India 382350
+                    </p>
+                </div>
+                <div class="nav-overlay__office">
+                    <p class="nav-overlay__office-city">Vadodara</p>
+                    <p class="nav-overlay__office-name">UrbanPixora</p>
+                    <p class="nav-overlay__office-addr">
+                        2nd floor, Msa House,<br>
+                        New Sama, Vadodara,<br>
+                        Gujarat, India 390002
+                    </p>
+                </div>
+            </div>
+
+        </aside>
+    </div>
+
+</div>
+}

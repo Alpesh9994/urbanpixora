@@ -1,0 +1,73 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Shared page-hero styles (used across all inner pages) ─────
+.page-hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 160px 0 100px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.page-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+.page-hero__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-lg;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.page-hero__heading {
+    font-size: clamp(3rem, 6vw, 5.2rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.08;
+    color: $color-text;
+    margin: 0 0 $space-xl;
+    letter-spacing: -0.02em;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: $color-accent;
+    }
+}
+
+.page-hero__sub {
+    font-size: $font-size-base;
+    line-height: $line-height-loose;
+    color: $color-text-muted;
+    max-width: 540px;
+    margin: 0;
+}

@@ -1,0 +1,128 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.site-footer {
+    background: $color-bg-secondary;
+    border-top: 1px solid $color-border;
+    padding: $space-xxl 0 $space-xl;
+}
+
+// ── Top row ───────────────────────────────────────────────────
+.site-footer__top {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $space-xl;
+    margin-bottom: $space-xl;
+}
+
+.site-footer__brand {
+    @include flex-col;
+    gap: $space-sm;
+    color: $color-text;
+}
+
+.site-footer__tagline {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin: 0;
+    letter-spacing: 0.04em;
+}
+
+.site-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-lg;
+    align-items: center;
+}
+
+.site-footer__nav-link {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    text-decoration: none;
+    @include transition(color, $transition-fast);
+
+    &:hover {
+        color: $color-accent;
+    }
+}
+
+// ── Divider ───────────────────────────────────────────────────
+.site-footer__divider {
+    height: 1px;
+    background: $color-border;
+    margin: $space-xl 0;
+}
+
+// ── Offices ───────────────────────────────────────────────────
+.site-footer__offices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-xl;
+
+    @include respond-md {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.site-footer__office {
+    @include flex-col;
+    gap: $space-xs;
+}
+
+.site-footer__office-city {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin: 0 0 $space-xs;
+}
+
+.site-footer__office-addr {
+    font-size: $font-size-xs;
+    line-height: 1.7;
+    color: $color-text-muted;
+    margin: 0;
+}
+
+.site-footer__office-contact {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-decoration: none;
+    @include transition(color, $transition-fast);
+
+    &:hover {
+        color: $color-accent;
+    }
+}
+
+// ── Bottom row ────────────────────────────────────────────────
+.site-footer__bottom {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: $space-lg;
+}
+
+.site-footer__copy {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin: 0;
+    letter-spacing: 0.03em;
+}
+
+.site-footer__social {
+    display: flex;
+    gap: $space-lg;
+}
+
+.site-footer__social-link {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    @include transition(color, $transition-fast);
+
+    &:hover {
+        color: $color-accent;
+    }
+}

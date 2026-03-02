@@ -1,0 +1,228 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+$lt-bg: #f7f7f5;
+$lt-text: #0e0e0e;
+$lt-muted: #777;
+$lt-border: rgba(0, 0, 0, 0.09);
+
+// ── VALUES SECTION (dark) ─────────────────────────────────────
+.about-values {
+    padding: 120px 0;
+    background: #0a0a0a;
+}
+
+.about-values__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-md;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.about-values__heading {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.12;
+    color: $color-text;
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: rgba($color-text, 0.35);
+    }
+}
+
+.about-values__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: $radius-md;
+    overflow: hidden;
+
+    @include respond-md {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-lg {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.about-values__card {
+    background: #0a0a0a;
+    padding: $space-xl;
+    transition: background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        background: #111;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: $color-accent;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover::after {
+        transform: scaleX(1);
+    }
+}
+
+.about-values__card-icon {
+    font-size: 1.8rem;
+    color: $color-accent;
+    margin-bottom: $space-lg;
+    display: block;
+}
+
+.about-values__card-title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin: 0 0 $space-sm;
+}
+
+.about-values__card-desc {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $color-text-muted;
+    margin: 0;
+}
+
+// ── PROCESS SECTION (light) ────────────────────────────────────
+.about-process {
+    padding: 120px 0;
+    background: $lt-bg;
+}
+
+.about-process__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-md;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.about-process__heading {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.12;
+    color: $lt-text;
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: rgba($lt-text, 0.35);
+    }
+}
+
+.about-process__intro {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $lt-muted;
+    margin: 0;
+}
+
+.about-process__steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    margin-top: $space-xxl;
+
+    @include respond-md {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.about-process__step {
+    position: relative;
+    padding: $space-xl $space-xl $space-xl 100px;
+    border: 1px solid $lt-border;
+    border-radius: $radius-md;
+    margin-bottom: $space-sm;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    }
+
+    &:hover .about-process__step-bar {
+        transform: scaleX(1);
+    }
+}
+
+.about-process__step-num {
+    position: absolute;
+    left: $space-xl;
+    top: $space-xl;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    line-height: 1;
+    opacity: 0.7;
+}
+
+.about-process__step-title {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $lt-text;
+    margin: 0 0 $space-sm;
+}
+
+.about-process__step-desc {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $lt-muted;
+    margin: 0;
+}
+
+.about-process__step-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $color-accent;
+    border-radius: 0 0 $radius-md $radius-md;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}

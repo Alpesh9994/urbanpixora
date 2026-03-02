@@ -1,0 +1,180 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Shared light section palette ──────────────────────────────
+$lt-bg: #f7f7f5;
+$lt-bg2: #eeeeeb;
+$lt-text: #0e0e0e;
+$lt-muted: #777777;
+$lt-border: rgba(0, 0, 0, 0.09);
+
+// ── Global section-label utility (used by light sections) ─────
+// Override the dark-version .section-tag from intro scss when inside a light section
+.projects-section .section-tag {
+    color: $color-accent;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    margin-bottom: $space-md;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.projects-section .section-heading {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.12;
+    color: $lt-text; // ← dark text on light bg
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: rgba($lt-text, 0.35);
+    }
+}
+
+// ── Section shell ────────────────────────────────────────────
+.projects-section {
+    padding: 120px 0;
+    background: $lt-bg;
+    position: relative;
+    overflow: hidden;
+}
+
+// ── View all link ────────────────────────────────────────────
+.view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: $lt-muted;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $color-accent;
+    }
+}
+
+// ── Project row ───────────────────────────────────────────────
+.project-row {
+    display: grid;
+    grid-template-columns: 52px 1fr auto 48px;
+    align-items: center;
+    gap: $space-lg;
+    padding: $space-xl 0;
+    border-top: 1px solid $lt-border;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    @include respond-lg {
+        grid-template-columns: 52px 200px 1fr auto 52px;
+    }
+
+    &:last-child {
+        border-bottom: 1px solid $lt-border;
+    }
+
+    &:hover {
+        .project-row__title {
+            color: $color-accent;
+        }
+
+        .project-row__arrow {
+            background: $color-accent;
+            color: #000;
+            border-color: $color-accent;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+.project-row__number {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-accent;
+    letter-spacing: 0.12em;
+}
+
+.project-row__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.project-row__category {
+    font-size: $font-size-xs;
+    color: $lt-muted;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.project-row__title {
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    color: $lt-text;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.project-row__desc {
+    font-size: $font-size-sm;
+    color: $lt-muted;
+    line-height: $line-height-normal;
+    margin: 0;
+    display: none;
+
+    @include respond-lg {
+        display: block;
+    }
+}
+
+.project-row__tags {
+    display: none;
+    flex-wrap: wrap;
+    gap: $space-xs;
+
+    @include respond-md {
+        display: flex;
+    }
+}
+
+.project-row__tag {
+    font-size: $font-size-xs;
+    padding: 4px 12px;
+    border: 1px solid $lt-border;
+    border-radius: $radius-full;
+    color: $lt-muted;
+    background: transparent;
+    white-space: nowrap;
+    transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.project-row__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: $radius-full;
+    border: 1px solid rgba($lt-text, 0.18);
+    color: $lt-text;
+    text-decoration: none;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}

@@ -1,0 +1,39 @@
+<section class="testimonials-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-5" scrollReveal revealFrom="left">
+                <span class="section-tag">Client Love</span>
+                <h2 class="section-heading">What People<br><em>Say About Us</em></h2>
+            </div>
+        </div>
+
+        <div class="testimonial-stage">
+            <div class="testimonial-card" scrollReveal revealFrom="up">
+                <!-- Quote mark -->
+                <div class="testimonial-card__quote-mark">"</div>
+                <p class="testimonial-card__text">
+                    {{ testimonials[activeIndex].quote }}
+                </p>
+                <div class="testimonial-card__footer">
+                    <div class="testimonial-card__avatar">{{ testimonials[activeIndex].initials }}</div>
+                    <div class="testimonial-card__info">
+                        <p class="testimonial-card__name">{{ testimonials[activeIndex].name }}</p>
+                        <p class="testimonial-card__role">{{ testimonials[activeIndex].role }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="testimonial-controls" scrollReveal revealFrom="right" [revealDelay]="150">
+                <button class="testimonial-btn" (click)="prev()" aria-label="Previous testimonial">←</button>
+                <div class="testimonial-dots">
+                    @for (t of testimonials; track $index) {
+                    <span class="testimonial-dot" [class.is-active]="$index === activeIndex"></span>
+                    }
+                </div>
+                <button class="testimonial-btn" (click)="next()" aria-label="Next testimonial">→</button>
+            </div>
+        </div>
+
+    </div>
+</section>

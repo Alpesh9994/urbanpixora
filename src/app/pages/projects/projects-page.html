@@ -1,0 +1,76 @@
+<!-- ─── DARK HERO ─────────────────────────────────────── -->
+<section class="page-hero">
+    <div class="page-hero__bg" aria-hidden="true">
+        <svg viewBox="0 0 1200 580" fill="none">
+            <polygon points="900,0 1200,0 1200,260 1050,340 820,110" stroke="rgba(245,166,35,0.09)" stroke-width="1"
+                fill="none" />
+            <circle cx="180" cy="460" r="200" stroke="rgba(255,255,255,0.025)" stroke-width="1" fill="none" />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="page-hero__breadcrumb">
+            <a routerLink="/">Home</a><span>/</span><span>Projects</span>
+        </div>
+        <div class="page-hero__inner">
+            <h1 class="page-hero__heading">
+                Designing a<br><em>Better</em> World Today
+            </h1>
+            <p class="page-hero__sub">
+                120+ projects across branding, web, UI/UX, and digital strategy.
+                Each built with purpose, precision, and passion.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FILTER TABS — LIGHT ──────────────────────────── -->
+<section class="filter-bar">
+    <div class="container">
+        <div class="filter-tabs" scrollReveal revealFrom="up">
+            @for (cat of categories; track cat) {
+            <button class="filter-tab" [class.is-active]="activeFilter() === cat" (click)="setFilter(cat)">
+                {{ cat }}
+            </button>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ─── PROJECTS GRID — LIGHT ────────────────────────── -->
+<section class="proj-grid-section">
+    <div class="container">
+        <div class="proj-grid">
+            @for (proj of filteredProjects; track proj.title; let i = $index) {
+            <div class="proj-card" scrollReveal revealFrom="up" [revealDelay]="(i % 3) * 80">
+                <!-- Thumbnail -->
+                <div class="proj-card__thumb">
+                    <div class="proj-card__thumb-icon">{{ proj.title[0] }}</div>
+                    <span class="proj-card__year">{{ proj.year }}</span>
+                </div>
+                <div class="proj-card__body">
+                    <span class="proj-card__cat">{{ proj.category }}</span>
+                    <h3 class="proj-card__title">{{ proj.title }}</h3>
+                    <p class="proj-card__desc">{{ proj.desc }}</p>
+                    <div class="proj-card__tags">
+                        @for (tag of proj.tags; track tag) {
+                        <span class="proj-card__tag">{{ tag }}</span>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ─── CTA STRIP ────────────────────────────────────── -->
+<section class="page-cta" scrollReveal revealFrom="up">
+    <div class="container">
+        <div class="page-cta__body">
+            <h2 class="page-cta__heading">Looking to make your mark?</h2>
+            <a class="page-cta__btn" routerLink="/contact">Start a project →</a>
+        </div>
+    </div>
+</section>
+
+<app-footer />

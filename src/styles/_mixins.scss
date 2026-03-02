@@ -1,0 +1,100 @@
+// ============================================================
+// SCSS Mixins — UrbanPixora
+// ============================================================
+@use 'styles/variables' as *;
+
+// --- Responsive Breakpoints ---
+@mixin respond-sm {
+    @media (min-width: $bp-sm) {
+        @content;
+    }
+}
+
+@mixin respond-md {
+    @media (min-width: $bp-md) {
+        @content;
+    }
+}
+
+@mixin respond-lg {
+    @media (min-width: $bp-lg) {
+        @content;
+    }
+}
+
+@mixin respond-xl {
+    @media (min-width: $bp-xl) {
+        @content;
+    }
+}
+
+@mixin respond-xxl {
+    @media (min-width: $bp-xxl) {
+        @content;
+    }
+}
+
+// --- Flexbox Shortcuts ---
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+// --- Typography Helpers ---
+@mixin heading($size: $font-size-lg, $weight: $font-weight-bold) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height-tight;
+    font-family: $font-primary;
+}
+
+@mixin body-text($size: $font-size-base) {
+    font-size: $size;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-normal;
+}
+
+// --- Overlay / Backdrop ---
+@mixin full-overlay($bg: rgba(0, 0, 0, 0.92), $z: $z-overlay) {
+    position: fixed;
+    inset: 0;
+    background: $bg;
+    z-index: $z;
+}
+
+// --- Smooth Transition ---
+@mixin transition($props: all, $duration: $transition-base) {
+    transition: $props $duration;
+}
+
+// --- Visually Hidden (accessibility) ---
+@mixin visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// --- Truncate text ---
+@mixin truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,167 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Color token helpers ───────────────────────────────────────
+$header-dark-text: #0e0e0e;
+$header-light-text: #ffffff;
+
+// ── Shell ─────────────────────────────────────────────────────
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-sticky;
+    height: 64px;
+    padding: 0 $space-xxl;
+
+    @include flex-between;
+
+    @include respond-md {
+        padding: 0 80px;
+    }
+
+    // Default: transparent — driven by modifier classes below
+    background: transparent;
+    transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s ease;
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATE: Home page dark hero — white text & logo
+// ══════════════════════════════════════════════════════════════
+.site-header.is-dark-page {
+    color: $header-light-text;
+
+    .site-header__brand {
+        color: $header-light-text;
+    }
+
+    .hamburger__line {
+        background: $header-light-text;
+    }
+
+    &:hover .site-header__toggle {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATE: Inner light page — dark text & logo
+// ══════════════════════════════════════════════════════════════
+.site-header.is-light-page {
+    color: $header-dark-text;
+
+    .site-header__brand {
+        color: $header-dark-text;
+    }
+
+    .hamburger__line {
+        background: $header-dark-text;
+    }
+
+    .site-header__toggle:hover {
+        background: rgba(0, 0, 0, 0.06);
+    }
+}
+
+// ══════════════════════════════════════════════════════════════
+// STATE: Scrolled — white card-style backdrop, always dark text
+// (applies on BOTH home & inner pages once user scrolls)
+// ══════════════════════════════════════════════════════════════
+.site-header.is-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.06);
+    color: $header-dark-text;
+
+    .site-header__brand {
+        color: $header-dark-text;
+    }
+
+    .hamburger__line {
+        background: $header-dark-text;
+    }
+
+    .site-header__toggle:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    // Override the open-state hamburger color too
+    .site-header__toggle.is-open .hamburger__line {
+        background: $header-dark-text;
+    }
+}
+
+// ── Brand ─────────────────────────────────────────────────────
+.site-header__brand {
+    @include flex-center;
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.65;
+    }
+}
+
+.site-header__logo {
+    height: 32px;
+    width: auto;
+}
+
+// ── Toggle Button ─────────────────────────────────────────────
+.site-header__toggle {
+    @include flex-center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: $radius-full;
+    transition: background 0.2s ease;
+
+    &:focus-visible {
+        outline: 2px solid $color-accent;
+        outline-offset: 2px;
+    }
+}
+
+// ── Hamburger Lines ───────────────────────────────────────────
+.hamburger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22px;
+    height: 12px;
+
+    &__line {
+        display: block;
+        width: 100%;
+        height: 2px;
+        border-radius: $radius-full;
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            background 0.2s ease,
+            opacity 0.2s ease;
+    }
+}
+
+// ── Open State — animate to × ─────────────────────────────────
+.site-header__toggle.is-open .hamburger {
+    &__line--top {
+        transform: translateY(5px) rotate(45deg);
+    }
+
+    &__line--mid {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    &__line--bot {
+        transform: translateY(-5px) rotate(-45deg);
+    }
+}

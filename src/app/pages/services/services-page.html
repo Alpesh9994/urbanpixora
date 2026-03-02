@@ -1,0 +1,67 @@
+<!-- ─── DARK HERO ─────────────────────────────────────── -->
+<section class="page-hero">
+    <div class="page-hero__bg" aria-hidden="true">
+        <svg viewBox="0 0 1200 580" fill="none">
+            <polygon points="820,0 1200,0 1200,280 1050,360 780,130" stroke="rgba(245,166,35,0.09)" stroke-width="1"
+                fill="none" />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="page-hero__breadcrumb">
+            <a routerLink="/">Home</a><span>/</span><span>Services</span>
+        </div>
+        <div class="page-hero__inner">
+            <h1 class="page-hero__heading">
+                This is what<br>we do <em>best</em>
+            </h1>
+            <p class="page-hero__sub">
+                Six core disciplines. One unified studio. Whether you need a brand from
+                scratch or a full-stack platform, we have you covered.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── SERVICES LIST — LIGHT ────────────────────────── -->
+<section class="svc-list">
+    <div class="container">
+        @for (svc of services; track svc.num; let i = $index) {
+        <div class="svc-row" scrollReveal revealFrom="up" [revealDelay]="0">
+            <!-- Number + icon -->
+            <div class="svc-row__meta">
+                <span class="svc-row__num">{{ svc.num }}</span>
+                <span class="svc-row__icon">{{ svc.icon }}</span>
+            </div>
+
+            <!-- Content -->
+            <div class="svc-row__content">
+                <h2 class="svc-row__title">{{ svc.title }}</h2>
+                <p class="svc-row__tagline">{{ svc.tagline }}</p>
+                <p class="svc-row__desc">{{ svc.desc }}</p>
+
+                <!-- Deliverables -->
+                <div class="svc-row__pills">
+                    @for (d of svc.deliverables; track d) {
+                    <span class="svc-pill">{{ d }}</span>
+                    }
+                </div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="svc-row__arrow">→</div>
+        </div>
+        }
+    </div>
+</section>
+
+<!-- ─── CTA STRIP ────────────────────────────────────── -->
+<section class="page-cta" scrollReveal revealFrom="up">
+    <div class="container">
+        <div class="page-cta__body">
+            <h2 class="page-cta__heading">Ready to get <em>started?</em></h2>
+            <a class="page-cta__btn" routerLink="/contact">Talk to us →</a>
+        </div>
+    </div>
+</section>
+
+<app-footer />

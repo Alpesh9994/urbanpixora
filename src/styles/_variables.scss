@@ -1,0 +1,73 @@
+// ============================================================
+// Design Tokens — UrbanPixora
+// ============================================================
+
+// --- Color Palette ---
+$color-bg: #000000; // Pure black – site background
+$color-bg-secondary: #0a0a0a; // Slightly lifted surface
+$color-primary: #ffffff; // Primary text on dark bg
+$color-primary-dim: rgba(#fff, 0.55);
+$color-accent: #f5a623; // Amber – CTAs, highlights
+$color-accent-dark: #d4890a; // Amber hover state
+$color-highlight: #f5a623; // alias kept for mixins
+$color-border: rgba(#fff, 0.10); // Subtle border on dark
+$color-surface: #ffffff;
+$color-surface-dark: #000000;
+$color-text: #ffffff;
+$color-text-muted: rgba(#fff, 0.45);
+$color-text-inverse: #000000;
+
+// --- Spacing Scale ---
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 40px;
+$space-xxl: 64px;
+
+// --- Typography ---
+$font-primary: 'Inter', 'Roboto', sans-serif;
+$font-mono: 'Fira Code', monospace;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-md: 1.125rem; // 18px
+$font-size-lg: 1.5rem; // 24px
+$font-size-xl: 2rem; // 32px
+$font-size-xxl: 3rem; // 48px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-loose: 1.75;
+
+// --- Border Radius ---
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 16px;
+$radius-full: 9999px;
+
+// --- Breakpoints (mirrors Bootstrap grid) ---
+$bp-xs: 0;
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+$bp-xxl: 1400px;
+
+// --- Z-index Scale ---
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-overlay: 900;
+$z-modal: 1000;
+$z-tooltip: 1100;
+
+// --- Transitions ---
+$transition-fast: 150ms ease;
+$transition-base: 300ms ease;
+$transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);

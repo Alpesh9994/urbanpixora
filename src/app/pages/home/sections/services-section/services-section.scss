@@ -1,0 +1,142 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Section shell ─────────────────────────────────────────────
+.services-section {
+    padding: 120px 0;
+    background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+}
+
+// ── Background grid lines ─────────────────────────────────────
+.services-section__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// ── Header ────────────────────────────────────────────────────
+.services-section__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-lg;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 28px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.services-section__heading {
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.12;
+    color: $color-text;
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: italic;
+        font-weight: $font-weight-regular;
+        color: rgba($color-text, 0.35);
+    }
+}
+
+.services-section__intro {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $color-text-muted;
+    margin: 0;
+    max-width: 380px;
+}
+
+// ── Services grid ─────────────────────────────────────────────
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-top: $space-xxl;
+
+    @include respond-md {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-lg {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+// ── Card ─────────────────────────────────────────────────────
+.service-card {
+    position: relative;
+    background: #0a0a0a;
+    padding: $space-xl;
+    overflow: hidden;
+    transition: background 0.35s ease;
+
+    &:hover {
+        background: #111111;
+
+        .service-card__icon-wrap {
+            color: $color-accent;
+        }
+
+        .service-card__bar {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.service-card__icon-wrap {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.25);
+    margin-bottom: $space-lg;
+    transition: color 0.35s ease;
+}
+
+.service-card__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin: 0 0 $space-sm;
+    letter-spacing: -0.01em;
+}
+
+.service-card__desc {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $color-text-muted;
+    margin: 0;
+}
+
+// Amber bottom bar on hover
+.service-card__bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $color-accent;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}

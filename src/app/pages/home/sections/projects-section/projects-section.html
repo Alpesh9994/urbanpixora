@@ -1,0 +1,36 @@
+<section class="projects-section">
+    <div class="container">
+
+        <!-- Header row -->
+        <div class="row mb-5" scrollReveal revealFrom="left">
+            <div class="col-lg-6">
+                <span class="section-tag">Featured Work</span>
+                <h2 class="section-heading">Projects That<br><em>Define Us</em></h2>
+            </div>
+            <div class="col-lg-4 offset-lg-2 d-flex align-items-end">
+                <a class="view-all-link" routerLink="/projects">
+                    View all projects →
+                </a>
+            </div>
+        </div>
+
+        <!-- Project list -->
+        @for (project of projects; track project.number; let i = $index) {
+        <div class="project-row" scrollReveal revealFrom="up" [revealDelay]="i * 80">
+            <div class="project-row__number">{{ project.number }}</div>
+            <div class="project-row__meta">
+                <span class="project-row__category">{{ project.category }}</span>
+                <h3 class="project-row__title">{{ project.title }}</h3>
+            </div>
+            <p class="project-row__desc">{{ project.desc }}</p>
+            <div class="project-row__tags">
+                @for (tag of project.tags; track tag) {
+                <span class="project-row__tag">{{ tag }}</span>
+                }
+            </div>
+            <a class="project-row__arrow" routerLink="/projects" aria-label="View {{ project.title }}">→</a>
+        </div>
+        }
+
+    </div>
+</section>

@@ -1,0 +1,228 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Light section palette ─────────────────────────────────────
+$light-bg: #f7f7f5;
+$light-bg-card: #efefed;
+$light-text: #111111;
+$light-text-muted: #666666;
+$light-border: rgba(0, 0, 0, 0.08);
+
+// ── Shell ─────────────────────────────────────────────────────
+.intro {
+    padding: 120px 0;
+    background: $light-bg;
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+// ── Background geometry (light, barely visible) ───────────────
+.intro__bg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.4;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// ── Two-column grid ───────────────────────────────────────────
+.intro__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-xxl;
+    align-items: center;
+
+    @include respond-lg {
+        grid-template-columns: 1fr 1fr;
+        gap: 100px;
+    }
+}
+
+// ── Left: text column ─────────────────────────────────────────
+.intro__content {}
+
+.intro__label {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $color-accent;
+    margin-bottom: $space-lg;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 2px;
+        background: $color-accent;
+    }
+}
+
+.intro__heading {
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.1;
+    color: $light-text;
+    margin: 0 0 $space-xl;
+
+    em {
+        font-style: normal;
+        font-weight: $font-weight-regular;
+        color: rgba($light-text, 0.45);
+    }
+}
+
+.intro__body {
+    font-size: $font-size-base;
+    line-height: $line-height-loose;
+    color: $light-text-muted;
+    margin: 0 0 $space-lg;
+    max-width: 460px;
+}
+
+.intro__body+.intro__body {
+    margin-top: $space-md;
+}
+
+.intro__signature {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    margin-top: $space-xl;
+    padding-top: $space-xl;
+    border-top: 1px solid $light-border;
+}
+
+.intro__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: $radius-full;
+    background: $color-accent;
+    color: #000;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.intro__avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    border-radius: $radius-full;
+    background: $color-accent;
+    border: 2px solid $light-bg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+}
+
+.intro__sig-name {
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    color: $light-text;
+    margin: 0;
+}
+
+.intro__sig-role {
+    font-size: $font-size-xs;
+    color: $light-text-muted;
+    margin: 0;
+}
+
+// ── Right: image column ───────────────────────────────────────
+.intro__visual {
+    position: relative;
+}
+
+.intro__image-wrap {
+    position: relative;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: $light-bg-card;
+}
+
+.intro__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+// Fallback design when no real image — placeholder with geometric overlay
+.intro__img-placeholder {
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg, #e8e8e5 0%, #d8d8d5 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-md;
+    color: rgba($light-text, 0.25);
+    font-size: $font-size-xxl;
+}
+
+// Floating stat badge (top-right of image)
+.intro__stat-badge {
+    position: absolute;
+    top: $space-lg;
+    right: -$space-lg;
+    background: $color-accent;
+    color: #000;
+    border-radius: $radius-md;
+    padding: $space-md $space-lg;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba($color-accent, 0.35);
+
+    @include respond-lg {
+        right: -$space-xl;
+    }
+}
+
+.intro__stat-badge-value {
+    display: block;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+}
+
+.intro__stat-badge-label {
+    display: block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-top: 2px;
+    opacity: 0.8;
+}
+
+// Small accent circle behind image
+.intro__circle-accent {
+    position: absolute;
+    bottom: -$space-lg;
+    left: -$space-lg;
+    width: 120px;
+    height: 120px;
+    border-radius: $radius-full;
+    border: 1px solid $light-border;
+    background: transparent;
+    pointer-events: none;
+}

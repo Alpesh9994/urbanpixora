@@ -1,0 +1,92 @@
+// ============================================================
+// Typography — UrbanPixora
+// ============================================================
+@use 'styles/variables' as *;
+
+// --- Google Fonts Import ---
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// --- Base ---
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// --- Heading Scale ---
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-primary;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    margin: 0 0 $space-md;
+}
+
+h1 {
+    font-size: $font-size-xxl;
+}
+
+h2 {
+    font-size: $font-size-xl;
+}
+
+h3 {
+    font-size: $font-size-lg;
+}
+
+h4 {
+    font-size: $font-size-md;
+}
+
+h5 {
+    font-size: $font-size-base;
+}
+
+h6 {
+    font-size: $font-size-sm;
+}
+
+p {
+    margin: 0 0 $space-md;
+    line-height: $line-height-loose;
+}
+
+a {
+    color: $color-highlight;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+strong {
+    font-weight: $font-weight-bold;
+}
+
+em {
+    font-style: italic;
+}
+
+small {
+    font-size: $font-size-xs;
+}

@@ -1,0 +1,88 @@
+<section class="hero">
+
+    <!-- Geometric wireframe background -->
+    <div class="hero__bg" aria-hidden="true">
+        <svg class="hero__polygons" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice"
+            xmlns="http://www.w3.org/2000/svg">
+            <!-- Top left polygon cluster -->
+            <polygon points="100,20 220,80 200,180 80,160 40,80" fill="none" stroke="rgba(255,255,255,0.07)"
+                stroke-width="1" />
+            <polygon points="60,100 160,60 200,160 120,220 40,170" fill="none" stroke="rgba(255,255,255,0.05)"
+                stroke-width="1" />
+            <polygon points="150,10 300,50 320,150 200,200 120,120" fill="none" stroke="rgba(255,255,255,0.04)"
+                stroke-width="1" />
+
+            <!-- Top right polygon cluster -->
+            <polygon points="1100,10 1280,60 1350,160 1220,230 1080,140" fill="none" stroke="rgba(255,255,255,0.07)"
+                stroke-width="1" />
+            <polygon points="1180,80 1350,30 1420,140 1300,210 1160,170" fill="none" stroke="rgba(255,255,255,0.05)"
+                stroke-width="1" />
+            <polygon points="1280,0 1440,80 1440,200 1340,250 1230,130" fill="none" stroke="rgba(255,255,255,0.04)"
+                stroke-width="1" />
+            <polygon points="1050,100 1200,50 1260,180 1140,260 1000,180" fill="none" stroke="rgba(255,255,255,0.04)"
+                stroke-width="1" />
+
+            <!-- Bottom right polygon cluster -->
+            <polygon points="900,500 1100,460 1200,580 1080,680 920,640" fill="none" stroke="rgba(255,255,255,0.06)"
+                stroke-width="1" />
+            <polygon points="1050,550 1250,500 1380,620 1260,740 1080,700" fill="none" stroke="rgba(255,255,255,0.05)"
+                stroke-width="1" />
+            <polygon points="1200,450 1380,400 1440,520 1380,660 1200,680" fill="none" stroke="rgba(255,255,255,0.04)"
+                stroke-width="1" />
+            <polygon points="1300,600 1440,560 1440,720 1350,780 1240,700" fill="none" stroke="rgba(255,255,255,0.05)"
+                stroke-width="1" />
+
+            <!-- Mid left faint polygon -->
+            <polygon points="0,400 120,360 180,480 80,560 0,500" fill="none" stroke="rgba(255,255,255,0.04)"
+                stroke-width="1" />
+        </svg>
+    </div>
+
+    <!-- Vertical HOME label -->
+    <span class="hero__side-label" aria-hidden="true">HOME</span>
+
+    <!-- Main content -->
+    <div class="hero__content">
+
+        <h1 class="hero__heading">
+            <span class="hero__heading--bold">Designing</span>
+            <span class="hero__heading--light"> a Stage for</span>
+            <br>
+            <span class="hero__heading--light">Your </span>
+            <span class="hero__heading--bold">Brand's Story</span>
+        </h1>
+
+        <p class="hero__sub">
+            Brands need a great product and a compelling marketing strategy to
+            truly succeed. You have a perfect product, we have a perfect
+            marketing way. Together, we can design a stage for your target
+            audience to showcase your brand's unique story.
+        </p>
+
+        <div class="hero__actions">
+            <a class="hero__btn hero__btn--primary" routerLink="/contact">
+                Get a Call Back
+                <span class="hero__btn-arrow">→</span>
+            </a>
+            <a class="hero__btn hero__btn--ghost" routerLink="/work">
+                What We Do
+                <span class="hero__btn-arrow">→</span>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Circular scroll indicator -->
+    <div class="hero__scroll" aria-label="Scroll down">
+        <svg class="hero__scroll-ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <path id="scroll-circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+            </defs>
+            <text class="hero__scroll-text" font-size="10.5" letter-spacing="4.8" fill="rgba(255,255,255,0.55)">
+                <textPath href="#scroll-circle">SCROLL DOWN • SCROLL DOWN •</textPath>
+            </text>
+        </svg>
+        <div class="hero__scroll-icon">↓</div>
+    </div>
+
+</section>

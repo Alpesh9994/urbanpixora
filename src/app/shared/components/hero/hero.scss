@@ -1,0 +1,194 @@
+@use 'sass:color';
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Shell ─────────────────────────────────────────────────────
+.hero {
+    position: relative;
+    min-height: 100vh;
+    background: $color-bg;
+    overflow: hidden;
+    @include flex-col;
+    justify-content: center;
+    padding: 0 $space-xxl;
+
+    @include respond-md {
+        padding: 0 80px;
+    }
+}
+
+// ── Polygon Background ────────────────────────────────────────
+.hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero__polygons {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+// ── Vertical side label ───────────────────────────────────────
+.hero__side-label {
+    position: absolute;
+    left: 20px;
+    bottom: $space-xl;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.2em;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+// ── Content ───────────────────────────────────────────────────
+.hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+}
+
+// ── Heading ───────────────────────────────────────────────────
+.hero__heading {
+    font-family: $font-primary;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.12;
+    margin: 0 0 $space-lg;
+    color: $color-text;
+
+    &--bold {
+        font-weight: $font-weight-bold;
+    }
+
+    &--light {
+        font-weight: $font-weight-regular;
+    }
+}
+
+// ── Subtitle ──────────────────────────────────────────────────
+.hero__sub {
+    font-size: $font-size-sm;
+    line-height: $line-height-loose;
+    color: $color-text-muted;
+    max-width: 400px;
+    margin: 0 0 $space-xl;
+}
+
+// ── CTA Buttons ───────────────────────────────────────────────
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: $space-lg;
+    flex-wrap: wrap;
+}
+
+.hero__btn {
+    @include flex-center;
+    gap: $space-sm;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: $radius-full;
+    padding: 14px 28px;
+    cursor: pointer;
+    @include transition(all, $transition-base);
+
+    &-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: $radius-full;
+        font-size: $font-size-base;
+    }
+
+    // ── Filled amber ─────────────────────────────────────────
+    &--primary {
+        background: $color-accent;
+        color: $color-text-inverse;
+
+        .hero__btn-arrow {
+            background: color.adjust($color-accent, $lightness: -10%);
+        }
+
+        &:hover {
+            background: $color-accent-dark;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba($color-accent, 0.35);
+        }
+    }
+
+    // ── Ghost ────────────────────────────────────────────────
+    &--ghost {
+        background: transparent;
+        color: $color-text;
+        border: none;
+
+        .hero__btn-arrow {
+            border: 1px solid rgba($color-text, 0.25);
+        }
+
+        &:hover {
+            color: $color-accent;
+
+            .hero__btn-arrow {
+                border-color: $color-accent;
+                color: $color-accent;
+            }
+        }
+    }
+}
+
+// ── Circular Scroll Indicator ─────────────────────────────────
+.hero__scroll {
+    position: absolute;
+    bottom: $space-xl;
+    right: $space-xxl;
+    width: 90px;
+    height: 90px;
+    @include flex-center;
+    z-index: 2;
+
+    @include respond-md {
+        right: 80px;
+    }
+}
+
+.hero__scroll-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: spin-slow 12s linear infinite;
+}
+
+.hero__scroll-icon {
+    @include flex-center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-full;
+    background: $color-accent;
+    color: $color-text-inverse;
+    font-size: $font-size-md;
+    font-weight: $font-weight-bold;
+    z-index: 1;
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

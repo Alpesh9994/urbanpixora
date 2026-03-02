@@ -1,0 +1,201 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Overlay Shell ─────────────────────────────────────────────
+.nav-overlay {
+    @include full-overlay($color-bg, $z-overlay);
+    @include flex-col;
+
+    // top: brand + close
+    // body: two-column content
+}
+
+// ── Brand ─────────────────────────────────────────────────────
+.nav-overlay__brand {
+    position: absolute;
+    top: $space-lg;
+    left: $space-xxl;
+    color: $color-text;
+    text-decoration: none;
+    @include flex-center;
+    @include transition(opacity, $transition-fast);
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    @include respond-md {
+        left: 80px;
+    }
+}
+
+// ── Close Button ──────────────────────────────────────────────
+.nav-overlay__close {
+    position: absolute;
+    top: $space-lg;
+    right: $space-xxl;
+    background: transparent;
+    border: none;
+    color: rgba($color-text, 0.55);
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: $space-sm;
+    border-radius: $radius-full;
+    @include transition(color background, $transition-fast);
+
+    &:hover {
+        color: $color-text;
+        background: rgba($color-text, 0.06);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-accent;
+        outline-offset: 2px;
+    }
+
+    @include respond-md {
+        right: 80px;
+    }
+}
+
+// ── Background Shapes ─────────────────────────────────────────
+.nav-overlay__shapes {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 60%;
+    pointer-events: none;
+    opacity: 0.8;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// ── Two-column body ───────────────────────────────────────────
+.nav-overlay__body {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    height: 100%;
+    padding: 100px $space-xxl $space-xxl;
+    align-items: center;
+
+    @include respond-md {
+        padding: 100px 80px $space-xxl;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+// ── Primary Nav (left) ────────────────────────────────────────
+.nav-overlay__primary {
+    @include flex-col;
+    gap: $space-md;
+    padding-right: $space-xxl;
+}
+
+.nav-overlay__link {
+    font-family: $font-primary;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: $font-weight-bold;
+    line-height: 1.15;
+    color: $color-text;
+    text-decoration: none;
+    position: relative;
+    @include transition(color, $transition-fast);
+
+    // Active state: amber
+    &.is-active {
+        color: $color-accent;
+    }
+
+    &:hover:not(.is-active) {
+        color: rgba($color-text, 0.55);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-accent;
+        outline-offset: 4px;
+        border-radius: $radius-sm;
+    }
+}
+
+// ── Aside (right) ─────────────────────────────────────────────
+.nav-overlay__aside {
+    padding-left: $space-xxl;
+    @include flex-col;
+    gap: $space-lg;
+
+    @include respond-md {
+        padding-left: 80px;
+        border-left: 1px solid $color-border;
+    }
+}
+
+// ── Useful Links ──────────────────────────────────────────────
+.nav-overlay__util {
+    @include flex-col;
+    gap: $space-xs;
+}
+
+.nav-overlay__util-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+    margin: 0 0 $space-sm;
+    letter-spacing: 0.02em;
+}
+
+.nav-overlay__util-link {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-decoration: none;
+    @include transition(color, $transition-fast);
+    padding: 2px 0;
+
+    &:hover {
+        color: $color-text;
+    }
+}
+
+// ── Divider ───────────────────────────────────────────────────
+.nav-overlay__divider {
+    border: none;
+    border-top: 1px solid $color-border;
+    margin: 0;
+}
+
+// ── Office Addresses ──────────────────────────────────────────
+.nav-overlay__offices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-lg;
+}
+
+.nav-overlay__office {
+    @include flex-col;
+    gap: 2px;
+}
+
+.nav-overlay__office-city {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+    margin: 0 0 $space-sm;
+}
+
+.nav-overlay__office-name {
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    margin: 0 0 $space-xs;
+}
+
+.nav-overlay__office-addr {
+    font-size: $font-size-xs;
+    line-height: 1.7;
+    color: $color-text-muted;
+    margin: 0;
+}

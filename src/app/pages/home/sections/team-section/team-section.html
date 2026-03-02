@@ -1,0 +1,61 @@
+<section class="team-section">
+
+    <!-- Subtle background circles -->
+    <div class="team-section__bg" aria-hidden="true">
+        <svg viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="820" cy="100" r="260" stroke="rgba(0,0,0,0.04)" stroke-width="1" />
+            <circle cx="820" cy="100" r="180" stroke="rgba(0,0,0,0.03)" stroke-width="1" />
+            <circle cx="180" cy="500" r="200" stroke="rgba(0,0,0,0.04)" stroke-width="1" />
+        </svg>
+    </div>
+
+    <div class="container">
+
+        <!-- Heading -->
+        <div class="row mb-5" scrollReveal revealFrom="up">
+            <div class="col-lg-7">
+                <span class="team-section__label">The People Behind It</span>
+                <h2 class="team-section__heading">
+                    Meet the <em>Partners</em>
+                </h2>
+                <p class="team-section__sub">
+                    Two specialists, one shared vision — to craft digital products
+                    that are as beautiful as they are functional.
+                </p>
+            </div>
+        </div>
+
+        <!-- Partner cards -->
+        <div class="team-partners">
+            @for (partner of partners; track partner.name; let i = $index) {
+            <div class="partner-card" scrollReveal revealFrom="up" [revealDelay]="i * 120">
+
+                <!-- Avatar -->
+                <div class="partner-card__avatar" [style.background]="partner.color">
+                    <span class="partner-card__initials">{{ partner.initials }}</span>
+                    <span class="partner-card__badge">✦</span>
+                </div>
+
+                <!-- Content -->
+                <div class="partner-card__content">
+                    <div class="partner-card__header">
+                        <h3 class="partner-card__name">{{ partner.name }}</h3>
+                        <span class="partner-card__role">{{ partner.role }}</span>
+                    </div>
+
+                    <p class="partner-card__bio">{{ partner.bio }}</p>
+
+                    <!-- Specialties -->
+                    <div class="partner-card__specialties">
+                        @for (skill of partner.specialties; track skill) {
+                        <span class="partner-card__skill">{{ skill }}</span>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            }
+        </div>
+
+    </div>
+</section>

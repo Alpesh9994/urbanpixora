@@ -1,0 +1,48 @@
+<section class="about-values">
+    <div class="container">
+        <div class="row mb-5" scrollReveal revealFrom="up">
+            <div class="col-lg-6">
+                <span class="about-values__label">What Drives Us</span>
+                <h2 class="about-values__heading">Our Core <em>Values</em></h2>
+            </div>
+        </div>
+        <div class="about-values__grid">
+            @for (val of values; track val.title; let i = $index) {
+            <div class="about-values__card" scrollReveal revealFrom="up" [revealDelay]="i * 80">
+                <div class="about-values__card-icon">{{ val.icon }}</div>
+                <h3 class="about-values__card-title">{{ val.title }}</h3>
+                <p class="about-values__card-desc">{{ val.desc }}</p>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="about-process">
+    <div class="container">
+        <div class="row mb-5" scrollReveal revealFrom="left">
+            <div class="col-lg-6">
+                <span class="about-process__label">How We Work</span>
+                <h2 class="about-process__heading">Our Creative <em>Process</em></h2>
+            </div>
+            <div class="col-lg-5 offset-lg-1 d-flex align-items-end">
+                <p class="about-process__intro">
+                    Every project follows a proven workflow — from discovery and strategy
+                    through to launch and optimisation.
+                </p>
+            </div>
+        </div>
+        <div class="about-process__steps">
+            @for (step of steps; track step.num; let i = $index) {
+            <div class="about-process__step" scrollReveal revealFrom="up" [revealDelay]="i * 80">
+                <div class="about-process__step-num">{{ step.num }}</div>
+                <div class="about-process__step-body">
+                    <h3 class="about-process__step-title">{{ step.title }}</h3>
+                    <p class="about-process__step-desc">{{ step.desc }}</p>
+                </div>
+                <div class="about-process__step-bar"></div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,54 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// ── Stats — dark section with amber numbers ──────────────────
+.stats-section {
+    padding: 100px 0;
+    background: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.06);
+
+    @include respond-md {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $space-sm;
+    padding: $space-xl $space-lg;
+    background: #000000;
+    text-align: center;
+    position: relative;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #0a0a0a;
+    }
+}
+
+.stat-item__value {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: $font-weight-bold;
+    color: $color-accent;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.stat-item__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
