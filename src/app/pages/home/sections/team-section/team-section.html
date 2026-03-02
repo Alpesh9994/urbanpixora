@@ -31,7 +31,7 @@
             <div class="partner-card" scrollReveal revealFrom="up" [revealDelay]="i * 120">
 
                 <!-- Avatar -->
-                <div class="partner-card__avatar" [style.background]="partner.color">
+                <div class="partner-card__avatar" [style.background]="i % 2 === 0 ? 'var(--color-accent-light)' : 'var(--color-accent-dark)'">
                     <span class="partner-card__initials">{{ partner.initials }}</span>
                     <span class="partner-card__badge">✦</span>
                 </div>

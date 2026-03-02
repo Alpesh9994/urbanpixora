@@ -11,7 +11,7 @@ $header-light-text: #ffffff;
     top: 0;
     left: 0;
     right: 0;
-    z-index: $z-sticky;
+    z-index: $z-header;
     height: 64px;
     padding: 0 $space-xxl;
 
@@ -135,8 +135,8 @@ $header-light-text: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 22px;
-    height: 12px;
+    width: 32px;
+    height: 22px;
 
     &__line {
         display: block;
@@ -148,12 +148,16 @@ $header-light-text: #ffffff;
             background 0.2s ease,
             opacity 0.2s ease;
     }
+    &__line--mid {
+        width: 70%; // Initially shorter
+        animation: pulse-line 1.5s infinite ease-in-out;
+    }
 }
 
 // ── Open State — animate to × ─────────────────────────────────
 .site-header__toggle.is-open .hamburger {
     &__line--top {
-        transform: translateY(5px) rotate(45deg);
+        transform: translateY(10px) rotate(45deg);
     }
 
     &__line--mid {
@@ -162,6 +166,21 @@ $header-light-text: #ffffff;
     }
 
     &__line--bot {
-        transform: translateY(-5px) rotate(-45deg);
+        transform: translateY(-10px) rotate(-45deg);
     }
+}
+
+@keyframes pulse-line {
+  0% {
+    width: 40%;
+    opacity: 0.6;
+  }
+  50% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 40%;
+    opacity: 0.6;
+  }
 }

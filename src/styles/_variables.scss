@@ -2,14 +2,19 @@
 // Design Tokens — UrbanPixora
 // ============================================================
 
+:root{
+    --color-accent-light: #165ed9;
+    --color-accent-dark: #0b1f3b;
+}
+
 // --- Color Palette ---
 $color-bg: #000000; // Pure black – site background
 $color-bg-secondary: #0a0a0a; // Slightly lifted surface
 $color-primary: #ffffff; // Primary text on dark bg
 $color-primary-dim: rgba(#fff, 0.55);
-$color-accent: #f5a623; // Amber – CTAs, highlights
-$color-accent-dark: #d4890a; // Amber hover state
-$color-highlight: #f5a623; // alias kept for mixins
+$color-accent: #2979ff; // Amber – CTAs, highlights
+$color-accent-dark: #165ed9; // Amber hover state
+$color-highlight: #2979ff; // alias kept for mixins
 $color-border: rgba(#fff, 0.10); // Subtle border on dark
 $color-surface: #ffffff;
 $color-surface-dark: #000000;
@@ -64,6 +69,7 @@ $bp-xxl: 1400px;
 $z-dropdown: 100;
 $z-sticky: 200;
 $z-overlay: 900;
+$z-header: 920;
 $z-modal: 1000;
 $z-tooltip: 1100;
 

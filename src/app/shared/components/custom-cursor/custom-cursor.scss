@@ -1,0 +1,49 @@
+// ── Firefly Glow-Worm Cursor ────────────────────────────────────
+// Accent colours from design tokens
+$accent: #2979ff;
+$accent-glow: rgba(#2979ff, 0.55);
+
+// ── Head: precise bright dot at real cursor position ──────────
+.cursor__head {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+        0 0 6px 2px $accent-glow,
+        0 0 14px 4px rgba(#2979ff, 0.35);
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 180ms ease, height 180ms ease, opacity 150ms ease;
+    mix-blend-mode: screen;
+}
+
+// ── Firefly tail particles (injected by TS) ───────────────────
+// .cursor__particle is added dynamically — these rules apply
+:host ::ng-deep .cursor__particle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+    will-change: left, top, width, height, opacity;
+}
+
+// Hover state: head pulses bigger
+body.cursor-hover .cursor__head {
+    width: 14px;
+    height: 14px;
+}
+
+// Click: quick shrink
+body.cursor-click .cursor__head {
+    width: 6px;
+    height: 6px;
+    opacity: 0.7;
+}

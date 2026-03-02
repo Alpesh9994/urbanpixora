@@ -130,9 +130,9 @@ $lt-border: rgba(0, 0, 0, 0.09);
     letter-spacing: -0.02em;
 
     // First card: dark initials on amber
-    .partner-card:first-child & {
-        color: #000;
-    }
+    // .partner-card:first-child & {
+    //     color: #000;
+    // }
 }
 
 .partner-card__badge {

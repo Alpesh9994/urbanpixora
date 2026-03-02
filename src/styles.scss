@@ -91,3 +91,37 @@ a {
     opacity: 0.85;
   }
 }
+
+// ── Custom Scrollbar ────────────────────────────────────────
+// Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-accent rgba(255, 255, 255, 0.05);
+}
+
+// Webkit (Chrome, Edge, Safari)
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-accent;
+  border-radius: 999px;
+  box-shadow: 0 0 8px rgba($color-accent, 0.55);
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $color-accent-dark;
+    box-shadow: 0 0 14px rgba($color-accent, 0.7);
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

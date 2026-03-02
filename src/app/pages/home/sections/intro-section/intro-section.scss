@@ -47,8 +47,6 @@ $light-border: rgba(0, 0, 0, 0.08);
 }
 
 // ── Left: text column ─────────────────────────────────────────
-.intro__content {}
-
 .intro__label {
     display: inline-flex;
     align-items: center;
@@ -158,6 +156,7 @@ $light-border: rgba(0, 0, 0, 0.08);
     overflow: hidden;
     aspect-ratio: 4/5;
     background: $light-bg-card;
+    padding: 40px;
 }
 
 .intro__img {
@@ -165,21 +164,7 @@ $light-border: rgba(0, 0, 0, 0.08);
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-// Fallback design when no real image — placeholder with geometric overlay
-.intro__img-placeholder {
-    width: 100%;
-    height: 100%;
-    background:
-        linear-gradient(135deg, #e8e8e5 0%, #d8d8d5 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: $space-md;
-    color: rgba($light-text, 0.25);
-    font-size: $font-size-xxl;
+    border-radius: $radius-lg;
 }
 
 // Floating stat badge (top-right of image)
@@ -193,6 +178,7 @@ $light-border: rgba(0, 0, 0, 0.08);
     padding: $space-md $space-lg;
     text-align: center;
     box-shadow: 0 8px 32px rgba($color-accent, 0.35);
+    z-index: 2;
 
     @include respond-lg {
         right: -$space-xl;
@@ -214,7 +200,7 @@ $light-border: rgba(0, 0, 0, 0.08);
     opacity: 0.8;
 }
 
-// Small accent circle behind image
+// Small accent circle (bottom-left decoration)
 .intro__circle-accent {
     position: absolute;
     bottom: -$space-lg;
@@ -225,4 +211,231 @@ $light-border: rgba(0, 0, 0, 0.08);
     border: 1px solid $light-border;
     background: transparent;
     pointer-events: none;
+}
+
+// ── Floating background shapes ─────────────────────────────────
+
+// Keyframes
+@keyframes floatY {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-18px);
+    }
+}
+
+@keyframes floatX {
+
+    0%,
+    100% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(14px);
+    }
+}
+
+@keyframes driftDiag {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(10px, -12px) rotate(45deg);
+    }
+
+    66% {
+        transform: translate(-8px, 8px) rotate(90deg);
+    }
+
+    100% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+}
+
+@keyframes spinSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseRing {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.18;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 0.08;
+    }
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(12px, -15px) scale(1.05);
+    }
+
+    50% {
+        transform: translate(20px, 5px) scale(0.97);
+    }
+
+    75% {
+        transform: translate(-8px, 12px) scale(1.03);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+// Container — fills the visual column, sits below image-wrap
+.intro__float-shapes {
+    position: absolute;
+    inset: -40px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+// Base shape
+.intro__shape {
+    position: absolute;
+    display: block;
+    border-radius: 0;
+}
+
+// Large outer ring — top-left area
+.intro__shape--ring-lg {
+    width: 220px;
+    height: 220px;
+    border-radius: $radius-full;
+    border: 1.5px solid rgba($color-accent, 0.22);
+    top: -30px;
+    left: -30px;
+    animation: pulseRing 7s ease-in-out infinite;
+}
+
+// Smaller ring — bottom-right
+.intro__shape--ring-sm {
+    width: 110px;
+    height: 110px;
+    border-radius: $radius-full;
+    border: 1.5px solid rgba($color-accent, 0.3);
+    bottom: 60px;
+    right: -20px;
+    animation: pulseRing 5s ease-in-out infinite 1.5s;
+}
+
+// Dot 1 — accent solid circle, top-right
+.intro__shape--dot-1 {
+    width: 14px;
+    height: 14px;
+    border-radius: $radius-full;
+    background: $color-accent;
+    opacity: 0.55;
+    top: 60px;
+    right: 30px;
+    animation: floatY 4.5s ease-in-out infinite;
+}
+
+// Dot 2 — muted, lower-left
+.intro__shape--dot-2 {
+    width: 9px;
+    height: 9px;
+    border-radius: $radius-full;
+    background: rgba($light-text, 0.2);
+    bottom: 120px;
+    left: 10px;
+    animation: floatY 6s ease-in-out infinite 0.8s;
+}
+
+// Dot 3 — small accent, mid-right
+.intro__shape--dot-3 {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: $color-accent;
+    opacity: 0.4;
+    top: 45%;
+    right: -10px;
+    animation: floatX 5s ease-in-out infinite 2s;
+}
+
+// Blob — large soft gradient circle behind the image
+.intro__shape--blob {
+    width: 280px;
+    height: 280px;
+    border-radius: $radius-full;
+    background: radial-gradient(circle, rgba($color-accent, 0.12) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: floatBlob 9s ease-in-out infinite;
+}
+
+// Cross / plus mark
+.intro__shape--cross {
+    width: 16px;
+    height: 16px;
+    top: 30%;
+    left: -10px;
+    opacity: 0.35;
+    animation: driftDiag 8s ease-in-out infinite 1s;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        background: $color-accent;
+        border-radius: 2px;
+    }
+
+    &::before {
+        width: 100%;
+        height: 2px;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    &::after {
+        width: 2px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+}
+
+// Diamond — rotated square
+.intro__shape--diamond {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba($color-accent, 0.5);
+    transform: rotate(45deg);
+    bottom: 140px;
+    right: 25px;
+    animation: spinSlow 12s linear infinite;
+}
+
+// Ensure image-wrap sits above shapes
+.intro__image-wrap {
+    position: relative;
+    z-index: 1;
 }
