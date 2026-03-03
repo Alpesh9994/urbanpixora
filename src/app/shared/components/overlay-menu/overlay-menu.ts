@@ -2,8 +2,7 @@ import {
     Component,
     inject,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import {
     trigger,
     style,
@@ -23,7 +22,7 @@ const OVERLAY_ANIM = trigger('overlayAnim', [
     ]),
     transition(':leave', [
         query('@itemAnim', stagger(30, animateChild()), { optional: true }),
-        animate('250ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
+        animate('200ms cubic-bezier(0.4, 0, 0.2, 1)', style({ opacity: 0 })),
     ]),
 ]);
 
@@ -34,7 +33,7 @@ const ITEM_ANIM = trigger('itemAnim', [
             style({ opacity: 1, transform: 'translateY(0)' })),
     ]),
     transition(':leave', [
-        animate('180ms cubic-bezier(0.4, 0, 0.2, 1)',
+        animate('150ms cubic-bezier(0.4, 0, 0.2, 1)',
             style({ opacity: 0, transform: 'translateY(10px)' })),
     ]),
 ]);
@@ -64,5 +63,19 @@ export class OverlayMenuComponent {
             return this.router.url === '/';
         }
         return this.router.url.startsWith(path);
+    }
+
+    /**
+     * Close the menu first, then navigate after the leave animation completes.
+     * This prevents the race condition where the new page mounts (and
+     * ScrollRevealDirective hides everything) while the overlay is still visible.
+     */
+    navigateTo(path: string, event: Event) {
+        event.preventDefault();
+        this.menuState.close();
+        // Wait for the leave animation to finish (200ms) before navigating
+        setTimeout(() => {
+            this.router.navigateByUrl(path);
+        }, 210);
     }
 }

@@ -35,8 +35,8 @@
         <!-- Left: Primary nav -->
         <nav class="nav-overlay__primary" role="navigation" aria-label="Main navigation">
             @for (link of navLinks; track link.path) {
-            <a class="nav-overlay__link" [class.is-active]="isActive(link.path)" [routerLink]="link.path"
-                (click)="menuState.close()" @itemAnim>
+            <a class="nav-overlay__link" [class.is-active]="isActive(link.path)" href="{{ link.path }}"
+                (click)="navigateTo(link.path, $event)" @itemAnim>
                 {{ link.label }}
             </a>
             }
