@@ -9,7 +9,7 @@ $lt-border: rgba(0, 0, 0, 0.09);
 
 // ── Shell ─────────────────────────────────────────────────────
 .team-section {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: $lt-bg;
     position: relative;
     overflow: hidden;
@@ -87,39 +87,62 @@ $lt-border: rgba(0, 0, 0, 0.09);
     background: #fff;
     border: 1px solid $lt-border;
     border-radius: $radius-lg;
-    padding: $space-xl;
+    padding: $space-lg; // mobile: tighter
     display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: $space-xl;
+    grid-template-columns: 1fr; // mobile: stacked
+    gap: $space-lg;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    @include respond-md {
+        grid-template-columns: 100px 1fr;
+        padding: $space-xl;
+        gap: $space-xl;
+    }
+
+    @include respond-lg {
+        grid-template-columns: 120px 1fr;
+        padding: $space-xxl;
+    }
 
     &:hover {
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
         transform: translateY(-4px);
-    }
-
-    @include respond-md {
-        grid-template-columns: 120px 1fr;
-        padding: $space-xxl;
     }
 }
 
 // ── Avatar ────────────────────────────────────────────────────
 .partner-card__avatar {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: $radius-lg;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     align-self: start;
+    margin: 0 auto; // center on mobile
 
     @include respond-md {
+        width: 100px;
+        height: 100px;
+        margin: 0; // left-aligned on wider screens
+    }
+
+    @include respond-lg {
         width: 120px;
         height: 120px;
+    }
+
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.06);
+
+        .partner-card__badge {
+            transform: rotate(360deg);
+        }
     }
 }
 
@@ -149,6 +172,20 @@ $lt-border: rgba(0, 0, 0, 0.09);
     justify-content: center;
     font-size: 9px;
     color: #000;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Avatar hover: scale up + spin the badge
+.partner-card__avatar {
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.06);
+
+        .partner-card__badge {
+            transform: rotate(360deg);
+        }
+    }
 }
 
 // ── Content ───────────────────────────────────────────────────
@@ -203,11 +240,13 @@ $lt-border: rgba(0, 0, 0, 0.09);
     color: $lt-muted;
     background: transparent;
     letter-spacing: 0.03em;
-    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    transition: border-color 0.22s ease, color 0.22s ease,
+        background 0.22s ease, transform 0.22s ease;
 
     &:hover {
         border-color: $color-accent;
         color: $color-accent;
-        background: rgba($color-accent, 0.06);
+        background: rgba($color-accent, 0.08);
+        transform: scale(1.06);
     }
 }

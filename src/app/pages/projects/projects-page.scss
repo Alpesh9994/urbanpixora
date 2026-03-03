@@ -14,7 +14,7 @@ $border: rgba(0, 0, 0, 0.08);
     flex-direction: column;
     justify-content: flex-end;
     padding: 160px 0 80px;
-    background: $lt;
+    background: $lt2;
     position: relative;
     overflow: hidden;
 
@@ -258,25 +258,4 @@ $border: rgba(0, 0, 0, 0.08);
         margin: 0;
     }
 
-    &__btn {
-        display: inline-flex;
-        align-items: center;
-        gap: $space-sm;
-        background: $color-accent;
-        color: #000;
-        font-size: $font-size-xs;
-        font-weight: $font-weight-semibold;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 14px 28px;
-        border-radius: $radius-full;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-        &:hover {
-            background: $color-accent-dark;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba($color-accent, 0.25);
-        }
-    }
 }

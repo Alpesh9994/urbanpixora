@@ -48,7 +48,7 @@
             </div>
 
             <!-- Right: image / visual -->
-            <div class="intro__visual" scrollReveal revealFrom="right" [revealDelay]="150">
+            <div class="intro__visual">
 
                 <!-- Animated background shapes -->
                 <div class="intro__float-shapes" aria-hidden="true">
@@ -63,7 +63,8 @@
                 </div>
 
                 <div class="intro__image-wrap">
-                    <img class="intro__img" src="who-we-are.png" alt="UrbanPixora creative studio" />
+                    <canvas #sequenceCanvas class="intro__canvas"
+                        aria-label="UrbanPixora creative studio sequence"></canvas>
                 </div>
 
                 <!-- Floating amber stat badge -->

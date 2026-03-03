@@ -384,7 +384,7 @@ $border: rgba(0, 0, 0, 0.08);
 // ══════════════════════════════════════════════════════════════
 .page-cta {
     padding: 100px 0;
-    background: $lt2;
+    background: $lt;
     border-top: 1px solid $border;
 
     &__body {
@@ -402,25 +402,4 @@ $border: rgba(0, 0, 0, 0.08);
         margin: 0;
     }
 
-    &__btn {
-        display: inline-flex;
-        align-items: center;
-        gap: $space-sm;
-        background: $color-accent;
-        color: #000;
-        font-size: $font-size-xs;
-        font-weight: $font-weight-semibold;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 14px 28px;
-        border-radius: $radius-full;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-        &:hover {
-            background: $color-accent-dark;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba($color-accent, 0.25);
-        }
-    }
 }

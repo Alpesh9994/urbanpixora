@@ -9,6 +9,7 @@
 @use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 @use 'styles/typography';
+@use 'styles/buttons';
 
 // 3. Bootstrap grid only (no JS, no full reset)
 @use 'bootstrap/scss/bootstrap-grid';

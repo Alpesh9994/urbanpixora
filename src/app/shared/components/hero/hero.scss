@@ -5,12 +5,12 @@
 // ── Shell ─────────────────────────────────────────────────────
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 100svh; // fills screen incl. iOS address bar
     background: $color-bg;
     overflow: hidden;
     @include flex-col;
     justify-content: center;
-    padding: 0 $space-xxl;
+    padding: 80px 20px 40px; // mobile-first: top clears header
 
     @include respond-md {
         padding: 0 80px;
@@ -44,6 +44,11 @@
     color: $color-text-muted;
     text-transform: uppercase;
     z-index: 2;
+    display: none; // hidden on mobile
+
+    @include respond-md {
+        display: block;
+    }
 }
 
 // ── Two-column grid ──────────────────────────────────────────
@@ -72,15 +77,14 @@
 // ── Heading ───────────────────────────────────────────────────
 .hero__heading {
     font-family: $font-primary;
-    font-size: clamp(2.6rem, 5vw, 4.8rem);
+    font-size: clamp(2rem, 5vw, 4.8rem);
     line-height: 1.1;
     margin: 0 0 $space-lg;
     color: $color-text;
-    white-space: nowrap;
+    white-space: normal; // wraps on mobile
 
-    @media (max-width: 900px) {
-        white-space: normal;
-        font-size: clamp(2rem, 6vw, 3.2rem);
+    @include respond-lg {
+        white-space: nowrap;
     }
 
     &--bold {
@@ -97,31 +101,33 @@
     font-size: $font-size-sm;
     line-height: $line-height-loose;
     color: $color-text-muted;
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 0 $space-xl;
+
+    @include respond-md {
+        max-width: 400px;
+    }
 }
 
-// ── CTA Buttons ───────────────────────────────────────────────
+// Mobile: stacked buttons, full width
 .hero__actions {
     display: flex;
-    align-items: center;
-    gap: $space-lg;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: $space-md;
+
+    @include respond-sm {
+        flex-direction: row;
+        align-items: center;
+        gap: $space-lg;
+        flex-wrap: wrap;
+    }
 }
 
 .hero__btn {
+    // Shared structure for buttons inside the hero
     @include flex-center;
     gap: $space-sm;
     font-family: $font-primary;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: $radius-full;
-    padding: 14px 28px;
-    cursor: pointer;
-    @include transition(all, $transition-base);
 
     &-arrow {
         display: inline-flex;
@@ -131,32 +137,18 @@
         height: 30px;
         border-radius: $radius-full;
         font-size: $font-size-base;
+        transition: transform 0.3s ease;
     }
 
-    // ── Filled amber ─────────────────────────────────────────
-    &--primary {
-        background: $color-accent;
-        color: $color-text-inverse;
-
-        .hero__btn-arrow {
-            background: color.adjust($color-accent, $lightness: -10%);
-        }
-
-        &:hover {
-            background: $color-accent-dark;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba($color-accent, 0.35);
-        }
+    // Specific overrides for the arrow animation within primary/outline
+    &.btn-primary:hover .hero__btn-arrow {
+        transform: translateX(4px);
     }
 
-    // ── Ghost ────────────────────────────────────────────────
-    &--ghost {
-        background: transparent;
-        color: $color-text;
-        border: none;
-
+    &.btn-outline {
         .hero__btn-arrow {
             border: 1px solid rgba($color-text, 0.25);
+            transition: border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
         }
 
         &:hover {
@@ -165,6 +157,7 @@
             .hero__btn-arrow {
                 border-color: $color-accent;
                 color: $color-accent;
+                transform: translateX(4px);
             }
         }
     }
@@ -179,8 +172,10 @@
     height: 90px;
     @include flex-center;
     z-index: 2;
+    display: none; // hidden on mobile — takes up space
 
     @include respond-md {
+        display: flex;
         right: 80px;
     }
 }

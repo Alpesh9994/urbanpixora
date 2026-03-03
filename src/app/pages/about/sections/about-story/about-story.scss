@@ -7,14 +7,14 @@ $lt-muted: #777;
 $lt-border: rgba(0, 0, 0, 0.09);
 
 .about-story {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: $lt-bg;
 }
 
 .about-story__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-xxl;
+    gap: $space-xl;
     align-items: start;
 
     @include respond-lg {
@@ -62,21 +62,62 @@ $lt-border: rgba(0, 0, 0, 0.09);
     line-height: $line-height-loose;
     color: $lt-muted;
     margin: 0 0 $space-md;
+    max-width: 100%;
+
+    @include respond-md {
+        max-width: 480px;
+    }
 }
 
+// ── Timeline milestones ────────────────────────────────────────
 .about-story__milestones {
     display: flex;
     flex-direction: column;
-    gap: $space-md;
+    gap: 0;
     margin-top: $space-xl;
     padding-top: $space-xl;
     border-top: 1px solid $lt-border;
+    position: relative;
+
+    // Vertical connecting line
+    &::before {
+        content: '';
+        position: absolute;
+        left: 20px; // centre of the dot
+        top: $space-xl;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, $color-accent, transparent);
+    }
 }
 
 .about-story__milestone {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: $space-lg;
+    padding: $space-md 0 $space-md $space-xl;
+    position: relative;
+
+    // Timeline dot
+    &::before {
+        content: '';
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: $lt-bg;
+        border: 2px solid $color-accent;
+        transition: background 0.25s ease, transform 0.25s ease;
+        z-index: 1;
+    }
+
+    &:hover::before {
+        background: $color-accent;
+        transform: translateY(-50%) scale(1.3);
+    }
 }
 
 .about-story__milestone-year {
@@ -84,30 +125,38 @@ $lt-border: rgba(0, 0, 0, 0.09);
     font-weight: $font-weight-bold;
     color: $color-accent;
     min-width: 44px;
+    line-height: 1.4;
 }
 
 .about-story__milestone-text {
     font-size: $font-size-sm;
     color: $lt-muted;
+    line-height: 1.4;
 }
 
-// Stat cards stack
+// ── Stat cards ────────────────────────────────────────────────
 .about-story__stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: $space-sm;
+    position: sticky;
+    top: 88px; // sticks below header as user scrolls the story
 }
 
 .about-story__stat-card {
     background: #fff;
     border: 1px solid $lt-border;
     border-radius: $radius-lg;
-    padding: $space-xl $space-lg;
+    padding: $space-lg $space-md;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: $space-xs;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    @include respond-md {
+        padding: $space-xl $space-lg;
+    }
 
     &:hover {
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
@@ -118,17 +167,21 @@ $lt-border: rgba(0, 0, 0, 0.09);
         background: $color-accent;
 
         .about-story__stat-val {
-            color: #000;
+            color: #fff;
         }
 
         .about-story__stat-lbl {
-            color: rgba(0, 0, 0, 0.6);
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        &:hover {
+            box-shadow: 0 8px 28px rgba($color-accent, 0.35);
         }
     }
 }
 
 .about-story__stat-val {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
     font-weight: $font-weight-bold;
     color: $color-accent;
     line-height: 1;

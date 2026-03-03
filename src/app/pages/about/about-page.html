@@ -1,115 +1,6 @@
-<!-- ─── DARK HERO ─────────────────────────────────────── -->
-<section class="page-hero">
-    <div class="page-hero__bg" aria-hidden="true">
-        <svg viewBox="0 0 1200 580" fill="none">
-            <polygon points="820,0 1200,0 1200,280 1050,360 780,130" stroke="rgba(245,166,35,0.09)" stroke-width="1"
-                fill="none" />
-            <polygon points="0,200 200,80 260,240 90,380 0,290" stroke="rgba(255,255,255,0.04)" stroke-width="1"
-                fill="none" />
-        </svg>
-    </div>
-    <div class="container">
-        <div class="page-hero__breadcrumb">
-            <a routerLink="/">Home</a> <span>/</span> <span>About</span>
-        </div>
-        <div class="page-hero__inner">
-            <h1 class="page-hero__heading">
-                We Are <em>Creators</em><br>& Builders
-            </h1>
-            <p class="page-hero__sub">
-                A two-person creative powerhouse delivering digital experiences
-                that merge engineering precision with design excellence.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- ─── STORY — LIGHT ────────────────────────────────── -->
-<section class="about-story" scrollReveal revealFrom="up">
-    <div class="container">
-        <div class="about-story__grid">
-            <div class="about-story__text" scrollReveal revealFrom="left">
-                <span class="lt-label">Our Story</span>
-                <h2 class="lt-heading">Born from a<br><em>Shared Passion</em></h2>
-                <p class="lt-body">
-                    UrbanPixora was founded on a simple belief — that great digital
-                    products happen when technical mastery meets creative vision.
-                    Jayram and Vishal came together with complementary skills and
-                    a shared drive to build things that truly matter.
-                </p>
-                <p class="lt-body">
-                    What started as freelance collaborations has grown into a focused
-                    studio that takes on meaningful work — brands, web platforms, and
-                    digital campaigns — all crafted with care, intentionality, and craft.
-                </p>
-                <div class="about-story__milestones">
-                    <div class="milestone"><span class="milestone__year">2018</span><span class="milestone__text">Studio
-                            founded</span></div>
-                    <div class="milestone"><span class="milestone__year">2021</span><span class="milestone__text">50+
-                            projects delivered</span></div>
-                    <div class="milestone"><span class="milestone__year">2024</span><span
-                            class="milestone__text">Expanded to full-stack</span></div>
-                </div>
-            </div>
-            <div class="about-story__stats" scrollReveal revealFrom="right" [revealDelay]="140">
-                @for (s of stats; track s.val) {
-                <div class="stat-tile" [class.stat-tile--accent]="s.accent">
-                    <span class="stat-tile__val">{{ s.val }}</span>
-                    <span class="stat-tile__lbl">{{ s.lbl }}</span>
-                </div>
-                }
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ─── VALUES — LIGHT with border grid ─────────────── -->
-<section class="about-values" scrollReveal revealFrom="up">
-    <div class="container">
-        <div class="lt-header" scrollReveal revealFrom="left">
-            <span class="lt-label">What Drives Us</span>
-            <h2 class="lt-heading">Our Core <em>Values</em></h2>
-        </div>
-        <div class="about-values__grid">
-            @for (v of values; track v.title; let i = $index) {
-            <div class="value-card" scrollReveal revealFrom="up" [revealDelay]="i * 70">
-                <div class="value-card__icon">{{ v.icon }}</div>
-                <h3 class="value-card__title">{{ v.title }}</h3>
-                <p class="value-card__desc">{{ v.desc }}</p>
-            </div>
-            }
-        </div>
-    </div>
-</section>
-
-<!-- ─── PROCESS — LIGHT ──────────────────────────────── -->
-<section class="about-process">
-    <div class="container">
-        <div class="lt-header row mb-5" scrollReveal revealFrom="left">
-            <div class="col-lg-6">
-                <span class="lt-label">How We Work</span>
-                <h2 class="lt-heading">Our Creative <em>Process</em></h2>
-            </div>
-            <div class="col-lg-5 offset-lg-1 d-flex align-items-end">
-                <p class="lt-muted-body">Every project follows a proven workflow — from discovery and strategy through
-                    to launch and optimisation.</p>
-            </div>
-        </div>
-        <div class="about-process__steps">
-            @for (step of steps; track step.num; let i = $index) {
-            <div class="process-step" scrollReveal revealFrom="up" [revealDelay]="i * 70">
-                <span class="process-step__num">{{ step.num }}</span>
-                <div>
-                    <h3 class="process-step__title">{{ step.title }}</h3>
-                    <p class="process-step__desc">{{ step.desc }}</p>
-                </div>
-            </div>
-            }
-        </div>
-    </div>
-</section>
-
-<!-- ─── TEAM  (reused light section) ────────────────── -->
+<app-about-hero />
+<app-about-story />
+<app-about-values />
 <app-team-section />
 
 <!-- ─── CTA STRIP ────────────────────────────────────── -->
@@ -117,7 +8,7 @@
     <div class="container">
         <div class="page-cta__body">
             <h2 class="page-cta__heading">Ready to start a project?</h2>
-            <a class="page-cta__btn" routerLink="/contact">Let's talk →</a>
+            <a class="btn-primary" routerLink="/contact"><span>Let's talk →</span></a>
         </div>
     </div>
 </section>

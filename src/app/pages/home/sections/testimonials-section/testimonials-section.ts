@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 
 @Component({
     selector: 'app-testimonials-section',
     standalone: true,
-    imports: [ScrollRevealDirective],
+    imports: [ScrollRevealDirective, NgClass],
     templateUrl: './testimonials-section.html',
-    styleUrl: './testimonials-section.scss'
+    styleUrl: './testimonials-section.scss',
 })
 export class TestimonialsSectionComponent {
     readonly testimonials = [
@@ -29,12 +30,54 @@ export class TestimonialsSectionComponent {
             initials: 'RD'
         },
     ];
+
     activeIndex = 0;
 
-    prev() {
-        this.activeIndex = (this.activeIndex - 1 + this.testimonials.length) % this.testimonials.length;
+    /**
+     * Animation state machine:
+     *  null           → resting (content visible)
+     *  'exit-left'    → content slides out to the left  (Next clicked)
+     *  'exit-right'   → content slides out to the right (Prev clicked)
+     *  'enter-right'  → new content enters from the right (after Next exit)
+     *  'enter-left'   → new content enters from the left  (after Prev exit)
+     */
+    readonly animState = signal<string | null>(null);
+
+    private changeTo(newIndex: number, exitDir: 'left' | 'right'): void {
+        if (this.animState() !== null) return; // debounce during animation
+
+        // 1. Exit: slide out in the chosen direction
+        this.animState.set(`exit-${exitDir}`);
+
+        setTimeout(() => {
+            // 2. Swap content while invisible
+            this.activeIndex = newIndex;
+
+            // 3. Enter: appear from the opposite side (no transition yet)
+            const enterDir = exitDir === 'left' ? 'right' : 'left';
+            this.animState.set(`enter-${enterDir}`);
+
+            // 4. Two rAFs: let browser paint the enter position, then start the
+            //    CSS transition back to the default (translateX(0), opacity 1)
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    this.animState.set(null);
+                });
+            });
+        }, 280);
     }
-    next() {
-        this.activeIndex = (this.activeIndex + 1) % this.testimonials.length;
+
+    prev(): void {
+        this.changeTo(
+            (this.activeIndex - 1 + this.testimonials.length) % this.testimonials.length,
+            'right'
+        );
+    }
+
+    next(): void {
+        this.changeTo(
+            (this.activeIndex + 1) % this.testimonials.length,
+            'left'
+        );
     }
 }

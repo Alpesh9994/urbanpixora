@@ -14,7 +14,7 @@ $border: rgba(0, 0, 0, 0.08);
     flex-direction: column;
     justify-content: flex-end;
     padding: 160px 0 80px;
-    background: $lt;
+    background: $lt2;
     position: relative;
     overflow: hidden;
 
@@ -90,212 +90,313 @@ $border: rgba(0, 0, 0, 0.08);
 
 // ── CONTACT BODY (light) ──────────────────────────────────────
 .contact-body {
-    padding: 100px 0 120px;
+    padding: 60px 0 80px;
     background: $lt;
 }
 
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-xxl;
+    gap: $space-xl;
+    align-items: start;
 
     @include respond-lg {
-        grid-template-columns: 1fr 360px;
-        gap: 80px;
+        grid-template-columns: 1fr 380px;
+        gap: 60px;
     }
 }
 
 // ── Form ─────────────────────────────────────────────────────
+.contact-form-wrap {
+    background: $lt2;
+    padding: clamp(24px, 4vw, 40px);
+    border-radius: $radius-lg;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
 .form {
     display: flex;
     flex-direction: column;
-    gap: $space-lg;
+    gap: $space-md;
 }
 
 .form__heading {
-    font-size: $font-size-xl;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
     font-weight: $font-weight-bold;
     color: $text;
-    margin: 0 0 $space-lg;
+    margin: 0 0 $space-sm;
+    letter-spacing: -0.01em;
 }
 
 .form__row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-lg;
+    gap: $space-md;
 
     @include respond-md {
         grid-template-columns: 1fr 1fr;
+        gap: $space-md;
     }
 }
 
+// Implement Floating Labels
 .form__field {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: $space-xs;
 }
 
 .form__label {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-size: $font-size-sm;
     color: $muted;
+    background: $lt2;
+    padding: 0 4px;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    transform-origin: left top;
 }
 
 .form__input,
 .form__textarea {
     width: 100%;
-    padding: 14px $space-md;
+    padding: 13px 16px;
     border-radius: $radius-md;
-    border: 1.5px solid $border;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
     background: $lt2;
     color: $text;
     font-family: $font-primary;
     font-size: $font-size-sm;
     outline: none;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    transition: all 0.22s ease;
 
     &::placeholder {
-        color: rgba($text, 0.28);
+        color: transparent;
+    }
+
+    &:hover {
+        border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    &:focus,
+    &:not(:placeholder-shown) {
+        &+.form__label {
+            transform: translateY(-24px) scale(0.82);
+            color: $color-accent;
+            font-weight: $font-weight-semibold;
+        }
     }
 
     &:focus {
         border-color: $color-accent;
-        box-shadow: 0 0 0 3px rgba($color-accent, 0.1);
+        box-shadow: 0 0 0 3px rgba($color-accent, 0.08);
     }
 }
 
 .form__textarea {
     resize: vertical;
+    min-height: 110px;
 }
 
-.form__submit {
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: $space-sm;
-    background: $color-accent;
-    color: #000;
-    font-family: $font-primary;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 15px 30px;
-    border-radius: $radius-full;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:hover {
-        background: $color-accent-dark;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba($color-accent, 0.26);
-    }
+.form__submit-wrap {
+    margin-top: 4px;
 }
 
+// ── Success State ─────────────────────────────────────────────
 .form__success {
-    background: $lt2;
-    border: 1px solid $border;
+    background: rgba($color-accent, 0.05);
+    border: 1.5px solid rgba($color-accent, 0.2);
     border-radius: $radius-lg;
-    padding: $space-xxl;
+    padding: 60px 40px;
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     &-icon {
-        width: 60px;
-        height: 60px;
+        width: 72px;
+        height: 72px;
         border-radius: $radius-full;
         background: $color-accent;
-        color: #000;
-        font-size: 1.4rem;
-        font-weight: $font-weight-bold;
+        color: #fff;
+        font-size: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto $space-lg;
+        margin: 0 auto $space-xl;
+        box-shadow: 0 12px 30px rgba($color-accent, 0.2);
+        animation: scaleUpBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
     h3 {
         font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
         color: $text;
         margin: 0 0 $space-sm;
     }
 
     p {
-        font-size: $font-size-sm;
+        font-size: $font-size-base;
         color: $muted;
         margin: 0;
+        max-width: 300px;
         line-height: $line-height-loose;
     }
 }
 
-// ── Info panel ────────────────────────────────────────────────
+@keyframes scaleUpBounce {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 .contact-info {
-    padding: $space-xl $space-xl;
     background: $lt2;
-    border: 1px solid $border;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: $radius-lg;
-    height: fit-content;
+    padding: clamp(16px, 3vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+
+    // amber accent bar on left edge
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: $color-accent;
+        border-radius: $radius-lg 0 0 $radius-lg;
+    }
 
     &__heading {
-        font-size: $font-size-md;
+        font-size: $font-size-sm;
         font-weight: $font-weight-bold;
         color: $text;
-        margin: 0 0 $space-xl;
-        padding-bottom: $space-lg;
-        border-bottom: 1px solid $border;
+        margin: 0 0 $space-md;
+        padding-bottom: $space-sm;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding-left: $space-sm;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
     }
 
     &__item {
         display: flex;
-        align-items: flex-start;
-        gap: $space-md;
-        margin-bottom: $space-lg;
+        align-items: center;
+        gap: $space-sm;
+        padding: 10px $space-sm;
+        border-radius: $radius-md;
+        transition: background 0.2s ease;
+        cursor: default;
+
+        &:hover {
+            background: rgba($color-accent, 0.04);
+
+            .contact-info__icon-wrap {
+                background: $color-accent;
+                color: #fff;
+            }
+        }
     }
 
-    &__icon {
-        font-size: 1.2rem;
+    &__icon-wrap {
+        width: 30px;
+        height: 30px;
+        border-radius: $radius-md;
+        background: rgba($color-accent, 0.08);
+        color: $color-accent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
         flex-shrink: 0;
-        margin-top: 2px;
+        transition: all 0.25s ease;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
     }
 
     &__label {
-        font-size: $font-size-xs;
+        font-size: 9px;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         color: $muted;
         margin: 0;
         font-weight: $font-weight-semibold;
     }
 
     &__value {
-        font-size: $font-size-sm;
-        color: $text;
-        margin: 2px 0 0;
+        font-size: $font-size-xs;
         font-weight: $font-weight-medium;
-    }
-
-    &__social {
-        display: flex;
-        flex-direction: column;
-        gap: $space-sm;
-        margin-top: $space-xl;
-        padding-top: $space-lg;
-        border-top: 1px solid $border;
+        color: $text;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
-.social-link {
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: $muted;
-    text-decoration: none;
-    transition: color 0.25s ease;
+// Social links — icon-only circles in one row
+.contact-social {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: $space-sm $space-sm 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin-top: $space-sm;
 
-    &:hover {
-        color: $color-accent;
+    .social-link {
+        width: 32px;
+        height: 32px;
+        border-radius: $radius-full;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: $lt;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        &:hover {
+            background: $color-accent;
+            border-color: $color-accent;
+            color: #000;
+        }
     }
 }

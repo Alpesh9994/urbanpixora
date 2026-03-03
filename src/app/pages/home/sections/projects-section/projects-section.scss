@@ -46,7 +46,7 @@ $lt-border: rgba(0, 0, 0, 0.09);
 
 // ── Section shell ────────────────────────────────────────────
 .projects-section {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: $lt-bg;
     position: relative;
     overflow: hidden;
@@ -73,13 +73,36 @@ $lt-border: rgba(0, 0, 0, 0.09);
 // ── Project row ───────────────────────────────────────────────
 .project-row {
     display: grid;
-    grid-template-columns: 52px 1fr auto 48px;
+    // Mobile: number | (title+arrow stacked)
+    grid-template-columns: 40px 1fr 48px;
     align-items: center;
-    gap: $space-lg;
-    padding: $space-xl 0;
+    gap: $space-md;
+    padding: $space-lg 0;
     border-top: 1px solid $lt-border;
     cursor: pointer;
-    transition: background 0.3s ease;
+    position: relative;
+    transition: background 0.3s ease, padding-left 0.3s ease;
+    padding-left: 0;
+
+    // Animated left accent bar
+    &::before {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        background: $color-accent;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @include respond-md {
+        grid-template-columns: 52px 1fr auto 48px;
+        gap: $space-lg;
+        padding: $space-xl 0;
+    }
 
     @include respond-lg {
         grid-template-columns: 52px 200px 1fr auto 52px;
@@ -90,7 +113,18 @@ $lt-border: rgba(0, 0, 0, 0.09);
     }
 
     &:hover {
+        padding-left: 12px;
+
+        &::before {
+            transform: scaleY(1);
+        }
+
         .project-row__title {
+            color: $color-accent;
+        }
+
+        .project-row__tag {
+            border-color: rgba($color-accent, 0.35);
             color: $color-accent;
         }
 
@@ -176,5 +210,9 @@ $lt-border: rgba(0, 0, 0, 0.09);
     text-decoration: none;
     font-size: 1.1rem;
     flex-shrink: 0;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease,
+        border-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Hover state applied via parent (.project-row:hover .project-row__arrow)
+    // — See .project-row:hover block above
 }

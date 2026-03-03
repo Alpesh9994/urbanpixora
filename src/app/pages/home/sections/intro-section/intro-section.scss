@@ -10,7 +10,7 @@ $light-border: rgba(0, 0, 0, 0.08);
 
 // ── Shell ─────────────────────────────────────────────────────
 .intro {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: $light-bg;
     border-top: none;
     position: relative;
@@ -37,7 +37,7 @@ $light-border: rgba(0, 0, 0, 0.08);
 .intro__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-xxl;
+    gap: $space-xl; // tighter gap on mobile
     align-items: center;
 
     @include respond-lg {
@@ -86,7 +86,11 @@ $light-border: rgba(0, 0, 0, 0.08);
     line-height: $line-height-loose;
     color: $light-text-muted;
     margin: 0 0 $space-lg;
-    max-width: 460px;
+    max-width: 100%; // full width on mobile
+
+    @include respond-md {
+        max-width: 460px;
+    }
 }
 
 .intro__body+.intro__body {
@@ -130,6 +134,20 @@ $light-border: rgba(0, 0, 0, 0.08);
     align-items: center;
     justify-content: center;
     font-size: 8px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.intro__avatar {
+    // ...existing styles above...
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.08);
+
+        .intro__avatar-badge {
+            transform: rotate(360deg);
+        }
+    }
 }
 
 .intro__sig-name {
@@ -154,12 +172,11 @@ $light-border: rgba(0, 0, 0, 0.08);
     position: relative;
     border-radius: $radius-lg;
     overflow: hidden;
-    aspect-ratio: 4/5;
-    background: $light-bg-card;
-    padding: 40px;
+    aspect-ratio: 4/3;
+    background: transparent;
 }
 
-.intro__img {
+.intro__canvas {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -171,7 +188,7 @@ $light-border: rgba(0, 0, 0, 0.08);
 .intro__stat-badge {
     position: absolute;
     top: $space-lg;
-    right: -$space-lg;
+    right: 0; // flush on mobile
     background: $color-accent;
     color: #000;
     border-radius: $radius-md;

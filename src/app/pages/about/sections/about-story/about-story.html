@@ -1,4 +1,4 @@
-<section class="about-story">
+<section class="about-story" scrollReveal revealFrom="up">
     <div class="container">
         <div class="about-story__grid">
 
@@ -39,22 +39,12 @@
 
             <!-- Right: stat stack -->
             <div class="about-story__stats" scrollReveal revealFrom="right" [revealDelay]="150">
-                <div class="about-story__stat-card">
-                    <span class="about-story__stat-val">120+</span>
-                    <span class="about-story__stat-lbl">Projects Delivered</span>
+                @for (stat of stats; track stat.lbl; let i = $index) {
+                <div class="about-story__stat-card" [class.about-story__stat-card--accent]="stat.accent">
+                    <span class="about-story__stat-val">{{ stat.val }}</span>
+                    <span class="about-story__stat-lbl">{{ stat.lbl }}</span>
                 </div>
-                <div class="about-story__stat-card">
-                    <span class="about-story__stat-val">8+</span>
-                    <span class="about-story__stat-lbl">Years of Experience</span>
-                </div>
-                <div class="about-story__stat-card about-story__stat-card--accent">
-                    <span class="about-story__stat-val">40+</span>
-                    <span class="about-story__stat-lbl">Happy Clients</span>
-                </div>
-                <div class="about-story__stat-card">
-                    <span class="about-story__stat-val">2</span>
-                    <span class="about-story__stat-lbl">Founding Partners</span>
-                </div>
+                }
             </div>
 
         </div>

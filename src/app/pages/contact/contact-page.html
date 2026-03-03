@@ -32,32 +32,37 @@
                 @if (!submitted()) {
                 <form class="form" (submit)="onSubmit($event)" novalidate>
                     <h3 class="form__heading">Send a Message</h3>
+
                     <div class="form__row">
                         <div class="form__field">
-                            <label class="form__label" for="cf-name">Your Name *</label>
-                            <input id="cf-name" class="form__input" type="text" placeholder="Jayram Desai"
-                                [value]="name()" (input)="name.set($any($event.target).value)" required />
+                            <input id="cf-name" class="form__input" type="text" placeholder=" " [value]="name()"
+                                (input)="name.set($any($event.target).value)" required />
+                            <label class="form__label" for="cf-name">Your Name</label>
                         </div>
                         <div class="form__field">
-                            <label class="form__label" for="cf-email">Email Address *</label>
-                            <input id="cf-email" class="form__input" type="email" placeholder="hello@you.com"
-                                [value]="email()" (input)="email.set($any($event.target).value)" required />
+                            <input id="cf-email" class="form__input" type="email" placeholder=" " [value]="email()"
+                                (input)="email.set($any($event.target).value)" required />
+                            <label class="form__label" for="cf-email">Email Address</label>
                         </div>
                     </div>
+
                     <div class="form__field">
+                        <input id="cf-subject" class="form__input" type="text" placeholder=" " [value]="subject()"
+                            (input)="subject.set($any($event.target).value)" required />
                         <label class="form__label" for="cf-subject">Subject</label>
-                        <input id="cf-subject" class="form__input" type="text" placeholder="What's this about?"
-                            [value]="subject()" (input)="subject.set($any($event.target).value)" />
                     </div>
+
                     <div class="form__field">
-                        <label class="form__label" for="cf-msg">Tell us about your project *</label>
-                        <textarea id="cf-msg" class="form__textarea" rows="6"
-                            placeholder="Give us as much detail as you'd like..." [value]="message()"
+                        <textarea id="cf-msg" class="form__textarea" placeholder=" " [value]="message()"
                             (input)="message.set($any($event.target).value)" required></textarea>
+                        <label class="form__label" for="cf-msg">Project Details</label>
                     </div>
-                    <button class="form__submit" type="submit">
-                        Send Message <span>→</span>
-                    </button>
+
+                    <div class="form__submit-wrap">
+                        <button class="btn-primary" type="submit">
+                            <span>Send Message →</span>
+                        </button>
+                    </div>
                 </form>
                 } @else {
                 <div class="form__success">
@@ -70,22 +75,59 @@
 
             <!-- Info right -->
             <aside class="contact-info" scrollReveal revealFrom="right" [revealDelay]="130">
-                <h3 class="contact-info__heading">Contact Information</h3>
-                @for (item of info; track item.label) {
-                <div class="contact-info__item">
-                    <span class="contact-info__icon">{{ item.icon }}</span>
-                    <div>
-                        <p class="contact-info__label">{{ item.label }}</p>
-                        <p class="contact-info__value">{{ item.value }}</p>
+                <h3 class="contact-info__heading">Get in Touch</h3>
+
+                <div class="contact-info__items">
+                    @for (item of info; track item.label) {
+                    <div class="contact-info__item">
+                        <div class="contact-info__icon-wrap">{{ item.icon }}</div>
+                        <div class="contact-info__content">
+                            <p class="contact-info__label">{{ item.label }}</p>
+                            <p class="contact-info__value">{{ item.value }}</p>
+                        </div>
                     </div>
+                    }
                 </div>
-                }
-                <div class="contact-info__social">
-                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link">LinkedIn ↗</a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link">Instagram ↗</a>
-                    <a href="https://behance.net" target="_blank" rel="noopener" class="social-link">Behance ↗</a>
-                    <a href="https://dribbble.com" target="_blank" rel="noopener" class="social-link">Dribbble ↗</a>
+
+                <div class="contact-social">
+                    <!-- LinkedIn -->
+                    <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg>
+                    </a>
+                    <!-- Behance -->
+                    <a href="https://behance.net" target="_blank" rel="noopener" class="social-link"
+                        aria-label="Behance">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 6h7a4 4 0 0 1 0 8H3z" />
+                            <path d="M3 14h8a4 4 0 0 1 0 8H3z" />
+                            <path d="M15 7h6M15 12h6M15 17h6" />
+                        </svg>
+                    </a>
+                    <!-- Dribbble -->
+                    <a href="https://dribbble.com" target="_blank" rel="noopener" class="social-link"
+                        aria-label="Dribbble">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <path
+                                d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" />
+                        </svg>
+                    </a>
                 </div>
+
             </aside>
 
         </div>

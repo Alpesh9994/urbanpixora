@@ -3,7 +3,7 @@
 
 // ── Section shell ─────────────────────────────────────────────
 .services-section {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: $color-bg;
     position: relative;
     overflow: hidden;
@@ -89,15 +89,24 @@
 .service-card {
     position: relative;
     background: #0a0a0a;
-    padding: $space-xl;
+    padding: $space-lg; // mobile: tighter padding
     overflow: hidden;
     transition: background 0.35s ease;
+
+    @include respond-md {
+        padding: $space-xl;
+    }
 
     &:hover {
         background: #111111;
 
         .service-card__icon-wrap {
             color: $color-accent;
+            transform: translateY(-3px) scale(1.08);
+        }
+
+        .service-card__title {
+            letter-spacing: 0em;
         }
 
         .service-card__bar {
@@ -110,7 +119,7 @@
     font-size: 1.6rem;
     color: rgba(255, 255, 255, 0.25);
     margin-bottom: $space-lg;
-    transition: color 0.35s ease;
+    transition: color 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-card__title {

@@ -1,79 +1,96 @@
-// ── Brand → blue palette ───────────────────────────────────────
-$blue: #2979ff;
-$blue-mid: rgba(#2979ff, 0.45);
-$blue-soft: rgba(#165ed9, 0.25);
+@use 'styles/variables' as *;
 
-// ── Per-particle breath pulse ──────────────────────────────────
-@keyframes particlePulse {
+// Hide native cursor on desktop
+@media (pointer: fine) {
 
-    0%,
-    100% {
-        filter: brightness(0.85);
-        transform: translate(-50%, -50%) scale(1);
-    }
-
-    50% {
-        filter: brightness(1.55);
-        transform: translate(-50%, -50%) scale(1.28);
+    *,
+    *::before,
+    *::after {
+        cursor: none !important;
     }
 }
 
-// ── Cursor-move wave ring ──────────────────────────────────────
-@keyframes waveExpand {
-    from {
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-
-    to {
-        width: 220px;
-        height: 220px;
-        opacity: 0;
-    }
-}
-
-// ── Click centre flash ─────────────────────────────────────────
-@keyframes flashExpand {
-    from {
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-
-    to {
-        width: 180px;
-        height: 180px;
-        opacity: 0;
-    }
-}
-
-// ── Cursor head ───────────────────────────────────────────────
-.cursor__head {
+// ── Shared base ───────────────────────────────────────────────
+%cursor-base {
     position: fixed;
     top: 0;
     left: 0;
-    width: 8px;
-    height: 8px;
     border-radius: 50%;
-    background: #ffffff;
-    box-shadow:
-        0 0 5px 2px $blue-mid,
-        0 0 13px 5px rgba(#2979ff, 0.28),
-        0 0 24px 7px rgba(#165ed9, 0.12);
     pointer-events: none;
     z-index: 99999;
-    transform: translate(-50%, -50%);
-    transition: width 140ms ease, height 140ms ease, opacity 120ms ease;
+    will-change: transform;
+    // translate(-50%, -50%) is baked into the transform so the
+    // element centres on the cursor coordinate
+    transform: translate(-200px, -200px);
 }
 
-body.cursor-hover .cursor__head {
-    width: 13px;
-    height: 13px;
+// ── Dot — snaps to exact cursor position ──────────────────────
+.cursor__dot {
+    @extend %cursor-base;
+    width: 8px;
+    height: 8px;
+    background: $color-accent; // brand blue #2979ff
+    // Small inner glow so it's visible on both light and dark bg
+    box-shadow:
+        0 0 6px 2px rgba($color-accent, 0.5),
+        0 0 12px 4px rgba($color-accent, 0.2);
+    // Translate so the circle centred on cursor coords
+    // (applied additively in TS — we add this via JS transform)
+    margin-left: -4px;
+    margin-top: -4px;
+    // Shrinks slightly on click
+    transition: width 120ms ease, height 120ms ease,
+        margin 120ms ease, opacity 120ms ease;
 }
 
-body.cursor-click .cursor__head {
-    width: 5px;
-    height: 5px;
-    opacity: 0.55;
+// ── Ring — trails cursor with lerp ───────────────────────────
+.cursor__ring {
+    @extend %cursor-base;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid rgba($color-accent, 0.55);
+    background: rgba($color-accent, 0.04);
+    margin-left: -19px;
+    margin-top: -19px;
+    transition: width 200ms ease, height 200ms ease,
+        margin 200ms ease, border-color 200ms ease,
+        background 200ms ease, opacity 200ms ease;
+}
+
+// ── Hover state — ring expands, dot dims ─────────────────────
+body.cursor-hover {
+    .cursor__dot {
+        width: 11px;
+        height: 11px;
+        margin-left: -5.5px;
+        margin-top: -5.5px;
+        opacity: 0.55;
+    }
+
+    .cursor__ring {
+        width: 54px;
+        height: 54px;
+        margin-left: -27px;
+        margin-top: -27px;
+        border-color: rgba($color-accent, 0.35);
+        background: rgba($color-accent, 0.06);
+    }
+}
+
+// ── Click state — ring contracts fast ────────────────────────
+body.cursor-click {
+    .cursor__dot {
+        width: 5px;
+        height: 5px;
+        margin-left: -2.5px;
+        margin-top: -2.5px;
+    }
+
+    .cursor__ring {
+        width: 28px;
+        height: 28px;
+        margin-left: -14px;
+        margin-top: -14px;
+        border-color: rgba($color-accent, 0.8);
+    }
 }

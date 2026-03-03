@@ -3,7 +3,7 @@
 
 // ── Dark section ───────────────────────────────────────────────
 .testimonials-section {
-    padding: 120px 0;
+    padding: clamp(64px, 10vw, 120px) 0;
     background: #0a0a0a;
     position: relative;
 }
@@ -47,7 +47,7 @@
 .testimonial-stage {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $space-xl;
+    gap: $space-lg; // tighter on mobile
     align-items: end;
 
     @include respond-lg {
@@ -63,7 +63,6 @@
     border-radius: $radius-lg;
     padding: $space-xl;
     position: relative;
-    transition: border-color 0.3s ease;
 
     &::before {
         content: '';
@@ -78,6 +77,68 @@
 
     &:hover {
         border-color: rgba(255, 255, 255, 0.12);
+    }
+}
+
+// ── Inner content — directional slide, card frame stays solid ──
+.testimonial-card__content {
+    transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateX(0);
+
+    // EXIT: slides out in chosen direction
+    &.exit-left {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    &.exit-right {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    // ENTER: snap to start position (no transition), then null triggers slide-in
+    &.enter-left,
+    &.enter-right {
+        transition: none;
+    }
+
+    &.enter-left {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    &.enter-right {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+}
+
+// Staggered children animate in when content reaches resting state
+.testimonial-card__content:not(.exit-left):not(.exit-right):not(.enter-left):not(.enter-right) {
+    .testimonial-card__quote-mark {
+        animation: itemFadeUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) 0ms both;
+    }
+
+    .testimonial-card__text {
+        animation: itemFadeUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) 55ms both;
+    }
+
+    .testimonial-card__footer {
+        animation: itemFadeUp 0.38s cubic-bezier(0.4, 0, 0.2, 1) 110ms both;
+    }
+}
+
+@keyframes itemFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -133,11 +194,13 @@
 // ── Nav controls ──────────────────────────────────────────────
 .testimonial-controls {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; // horizontal on mobile: ← dots →
     align-items: center;
+    justify-content: center;
     gap: $space-lg;
 
     @include respond-lg {
+        flex-direction: column;
         align-items: flex-end;
     }
 }
@@ -157,26 +220,5 @@
     &.is-active {
         background: $color-accent;
         width: 20px;
-    }
-}
-
-.testimonial-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: $radius-full;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: transparent;
-    color: $color-text;
-    font-size: $font-size-base;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-
-    &:hover {
-        background: $color-accent;
-        border-color: $color-accent;
-        color: #000;
     }
 }

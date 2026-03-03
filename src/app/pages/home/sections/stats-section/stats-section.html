@@ -3,7 +3,7 @@
         <div class="stats-grid">
             @for (stat of stats; track stat.label; let i = $index) {
             <div class="stat-item" scrollReveal revealFrom="up" [revealDelay]="i * 100">
-                <span class="stat-item__value">{{ stat.value }}</span>
+                <span class="stat-item__value">{{ stat.current }}{{ stat.suffix }}</span>
                 <span class="stat-item__label">{{ stat.label }}</span>
             </div>
             }

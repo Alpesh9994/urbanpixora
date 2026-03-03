@@ -13,7 +13,7 @@ $header-light-text: #ffffff;
     right: 0;
     z-index: $z-header;
     height: 64px;
-    padding: 0 $space-xxl;
+    padding: 0 20px; // mobile-first: tight sides
 
     @include flex-between;
 
@@ -129,13 +129,9 @@ $header-light-text: #ffffff;
 // ── Toggle Button ─────────────────────────────────────────────
 .site-header__toggle {
     @include flex-center;
-    width: 44px;
-    height: 44px;
     padding: 0;
     border: none;
     background: transparent;
-    cursor: pointer;
-    border-radius: $radius-full;
     transition: background 0.2s ease;
 
     &:focus-visible {
@@ -163,6 +159,7 @@ $header-light-text: #ffffff;
             background 0.2s ease,
             opacity 0.2s ease;
     }
+
     &__line--mid {
         width: 70%; // Initially shorter
         animation: pulse-line 1.5s infinite ease-in-out;
@@ -186,16 +183,18 @@ $header-light-text: #ffffff;
 }
 
 @keyframes pulse-line {
-  0% {
-    width: 40%;
-    opacity: 0.6;
-  }
-  50% {
-    width: 100%;
-    opacity: 1;
-  }
-  100% {
-    width: 40%;
-    opacity: 0.6;
-  }
+    0% {
+        width: 40%;
+        opacity: 0.6;
+    }
+
+    50% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        width: 40%;
+        opacity: 0.6;
+    }
 }

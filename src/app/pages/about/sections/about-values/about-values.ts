@@ -22,4 +22,13 @@ export class AboutValuesComponent {
         { num: '03', title: 'Build & Develop', desc: 'Clean, performant code and refined UI come together with great engineering practices.' },
         { num: '04', title: 'Launch & Optimise', desc: 'We deploy, test, and refine post-launch — ensuring peak performance and happy users.' },
     ];
+
+    readonly techStack = [
+        { icon: '🅰️', name: 'Angular' },
+        { icon: '⚛️', name: 'React' },
+        { icon: '🟩', name: 'Node.js' },
+        { icon: 'ts', name: 'TypeScript' },
+        { icon: '🎨', name: 'Figma' },
+        { icon: '☁️', name: 'AWS' },
+    ];
 }

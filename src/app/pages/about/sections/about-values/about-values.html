@@ -1,3 +1,4 @@
+<!-- ─── VALUES SECTION ───────────────────────────────────── -->
 <section class="about-values">
     <div class="container">
         <div class="row mb-5" scrollReveal revealFrom="up">
@@ -18,6 +19,7 @@
     </div>
 </section>
 
+<!-- ─── PROCESS SECTION ──────────────────────────────────── -->
 <section class="about-process">
     <div class="container">
         <div class="row mb-5" scrollReveal revealFrom="left">
@@ -41,6 +43,26 @@
                     <p class="about-process__step-desc">{{ step.desc }}</p>
                 </div>
                 <div class="about-process__step-bar"></div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ─── TECH STACK SECTION ───────────────────────────────── -->
+<section class="about-stack">
+    <div class="container">
+        <div class="row mb-5" scrollReveal revealFrom="up">
+            <div class="col-lg-8">
+                <span class="about-stack__label">Our Toolkit</span>
+                <h2 class="about-stack__heading">Modern Tech for<br><em>Modern Needs</em></h2>
+            </div>
+        </div>
+        <div class="about-stack__grid">
+            @for (tool of techStack; track tool.name; let i = $index) {
+            <div class="about-stack__item" scrollReveal revealFrom="up" [revealDelay]="i * 50">
+                <div class="about-stack__item-icon">{{ tool.icon }}</div>
+                <div class="about-stack__item-name">{{ tool.name }}</div>
             </div>
             }
         </div>

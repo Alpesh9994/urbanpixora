@@ -8,32 +8,37 @@
         </div>
 
         <div class="testimonial-stage">
-            <div class="testimonial-card" scrollReveal revealFrom="up">
-                <!-- Quote mark -->
-                <div class="testimonial-card__quote-mark">"</div>
-                <p class="testimonial-card__text">
-                    {{ testimonials[activeIndex].quote }}
-                </p>
-                <div class="testimonial-card__footer">
-                    <div class="testimonial-card__avatar">{{ testimonials[activeIndex].initials }}</div>
-                    <div class="testimonial-card__info">
-                        <p class="testimonial-card__name">{{ testimonials[activeIndex].name }}</p>
-                        <p class="testimonial-card__role">{{ testimonials[activeIndex].role }}</p>
+
+            <!-- Card frame stays fixed — only content slides/fades -->
+            <div class="testimonial-card">
+                <div class="testimonial-card__content" [ngClass]="animState()">
+
+                    <div class="testimonial-card__quote-mark">"</div>
+
+                    <p class="testimonial-card__text">{{ testimonials[activeIndex].quote }}</p>
+
+                    <div class="testimonial-card__footer">
+                        <div class="testimonial-card__avatar">{{ testimonials[activeIndex].initials }}</div>
+                        <div class="testimonial-card__info">
+                            <p class="testimonial-card__name">{{ testimonials[activeIndex].name }}</p>
+                            <p class="testimonial-card__role">{{ testimonials[activeIndex].role }}</p>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
             <!-- Controls -->
             <div class="testimonial-controls" scrollReveal revealFrom="right" [revealDelay]="150">
-                <button class="testimonial-btn" (click)="prev()" aria-label="Previous testimonial">←</button>
+                <button class="btn-circle" (click)="prev()" aria-label="Previous testimonial">←</button>
                 <div class="testimonial-dots">
                     @for (t of testimonials; track $index) {
                     <span class="testimonial-dot" [class.is-active]="$index === activeIndex"></span>
                     }
                 </div>
-                <button class="testimonial-btn" (click)="next()" aria-label="Next testimonial">→</button>
+                <button class="btn-circle" (click)="next()" aria-label="Next testimonial">→</button>
             </div>
-        </div>
 
+        </div>
     </div>
 </section>

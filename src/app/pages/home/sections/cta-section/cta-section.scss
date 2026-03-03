@@ -9,7 +9,7 @@ $lt-border: rgba(0, 0, 0, 0.09);
 
 .cta-section {
     position: relative;
-    padding: 140px 0;
+    padding: clamp(64px, 10vw, 140px) 0;
     background: $lt-bg;
     overflow: hidden;
 }
@@ -77,79 +77,24 @@ $lt-border: rgba(0, 0, 0, 0.09);
 
 .cta-section__actions {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: $space-lg;
-    flex-wrap: wrap;
-}
+    flex-direction: column; // stack on mobile
+    align-items: stretch;
+    gap: $space-md;
 
-// ── Buttons ───────────────────────────────────────────────────
-.cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: $space-sm;
-    font-family: $font-primary;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-semibold;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: $radius-full;
-    padding: 15px 30px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    &__arrow {
-        display: inline-flex;
+    @include respond-sm {
+        flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 26px;
-        height: 26px;
-        border-radius: $radius-full;
-        font-size: 1rem;
-        transition: transform 0.3s ease;
+        gap: $space-lg;
     }
+}
 
-    &:hover .cta-btn__arrow {
-        transform: translateX(3px);
-    }
+// Mobile: center the stacked buttons
+.btn-primary,
+.btn-outline {
+    justify-content: center;
 
-    // Primary: solid amber on light bg
-    &--primary {
-        background: $color-accent;
-        color: #000;
-
-        .cta-btn__arrow {
-            background: rgba(0, 0, 0, 0.12);
-        }
-
-        &:hover {
-            background: $color-accent-dark;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px rgba($color-accent, 0.28);
-        }
-    }
-
-    // Ghost: dark border on cream bg
-    &--ghost {
-        background: transparent;
-        color: $lt-text;
-        border: 1.5px solid rgba($lt-text, 0.2);
-
-        .cta-btn__arrow {
-            border: 1.5px solid rgba($lt-text, 0.2);
-        }
-
-        &:hover {
-            border-color: $color-accent;
-            color: $color-accent;
-            transform: translateY(-2px);
-
-            .cta-btn__arrow {
-                border-color: $color-accent;
-                color: $color-accent;
-            }
-        }
+    @include respond-sm {
+        justify-content: flex-start;
     }
 }
