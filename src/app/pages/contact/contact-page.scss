@@ -203,6 +203,46 @@ $border: rgba(0, 0, 0, 0.08);
 
 .form__submit-wrap {
     margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $space-sm;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        min-height: 52px;
+
+        &:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background: rgba($color-accent, 0.8);
+        }
+    }
+}
+
+.form__spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.form__error {
+    font-size: $font-size-sm;
+    color: #dc3545;
+    margin: 0;
+    font-weight: $font-weight-medium;
 }
 
 // ── Success State ─────────────────────────────────────────────

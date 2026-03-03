@@ -16,7 +16,8 @@
 
         <!-- Project list -->
         @for (project of projects; track project.number; let i = $index) {
-        <div class="project-row" scrollReveal revealFrom="up" [revealDelay]="i * 80">
+        <a class="project-row" [routerLink]="['/projects', project.slug]" scrollReveal revealFrom="up"
+            [revealDelay]="i * 80">
             <div class="project-row__number">{{ project.number }}</div>
             <div class="project-row__meta">
                 <span class="project-row__category">{{ project.category }}</span>
@@ -28,8 +29,8 @@
                 <span class="project-row__tag">{{ tag }}</span>
                 }
             </div>
-            <a class="project-row__arrow" routerLink="/projects" aria-label="View {{ project.title }}">→</a>
-        </div>
+            <span class="project-row__arrow" aria-label="View {{ project.title }}">→</span>
+        </a>
         }
 
     </div>

@@ -59,9 +59,16 @@
                     </div>
 
                     <div class="form__submit-wrap">
-                        <button class="btn-primary" type="submit">
+                        <button class="btn-primary" type="submit" [disabled]="loading()">
+                            @if (loading()) {
+                            <span class="form__spinner"></span>
+                            } @else {
                             <span>Send Message →</span>
+                            }
                         </button>
+                        @if (error()) {
+                        <p class="form__error">⚠ {{ error() }}</p>
+                        }
                     </div>
                 </form>
                 } @else {

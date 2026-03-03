@@ -1,0 +1,135 @@
+<!-- ─── HERO ──────────────────────────────────────── -->
+<section class="cs-hero" [style.--accent]="project.color">
+    <div class="cs-hero__bg" aria-hidden="true">
+        <div class="cs-hero__glow"></div>
+    </div>
+    <div class="container">
+        <div class="cs-hero__breadcrumb">
+            <a routerLink="/">Home</a><span>/</span>
+            <a routerLink="/projects">Projects</a><span>/</span>
+            <span>{{ project.title }}</span>
+        </div>
+        <div class="cs-hero__inner" scrollReveal revealFrom="up">
+            <span class="cs-hero__cat">{{ project.category }} · {{ project.year }}</span>
+            <h1 class="cs-hero__heading">{{ project.title }}</h1>
+            <p class="cs-hero__desc">{{ project.desc }}</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── OVERVIEW BAR ──────────────────────────────── -->
+<section class="cs-overview">
+    <div class="container">
+        <div class="cs-overview__grid" scrollReveal revealFrom="up">
+            <div class="cs-overview__item">
+                <p class="cs-overview__label">Client</p>
+                <p class="cs-overview__value">{{ project.client }}</p>
+            </div>
+            <div class="cs-overview__item">
+                <p class="cs-overview__label">Duration</p>
+                <p class="cs-overview__value">{{ project.duration }}</p>
+            </div>
+            <div class="cs-overview__item">
+                <p class="cs-overview__label">Deliverables</p>
+                <p class="cs-overview__value">{{ project.deliverables }}</p>
+            </div>
+            <div class="cs-overview__item">
+                <p class="cs-overview__label">Category</p>
+                <p class="cs-overview__value">{{ project.category }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CHALLENGE ─────────────────────────────────── -->
+<section class="cs-section cs-section--light">
+    <div class="container">
+        <div class="cs-two-col" scrollReveal revealFrom="up">
+            <div class="cs-two-col__text">
+                <p class="cs-label">The Challenge</p>
+                <h2 class="cs-heading">What we were<br><em>up against</em></h2>
+                <p class="cs-body">{{ project.challenge }}</p>
+            </div>
+            <div class="cs-two-col__visual cs-two-col__visual--challenge">
+                <div class="cs-shape cs-shape--ring"></div>
+                <div class="cs-shape cs-shape--dot"></div>
+                <div class="cs-quote">
+                    <span class="cs-quote__mark">"</span>
+                    <p class="cs-quote__text">Every project starts with honest problem definition.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── SOLUTION ──────────────────────────────────── -->
+<section class="cs-section cs-section--gray">
+    <div class="container">
+        <div class="cs-two-col cs-two-col--reverse" scrollReveal revealFrom="up">
+            <div class="cs-two-col__visual cs-two-col__visual--solution">
+                <div class="cs-mockup">
+                    <div class="cs-mockup__screen">
+                        <div class="cs-mockup__bar"></div>
+                        <div class="cs-mockup__line"></div>
+                        <div class="cs-mockup__line cs-mockup__line--short"></div>
+                        <div class="cs-mockup__blocks">
+                            <div class="cs-mockup__block"></div>
+                            <div class="cs-mockup__block cs-mockup__block--accent" [style.background]="project.color">
+                            </div>
+                            <div class="cs-mockup__block"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cs-two-col__text">
+                <p class="cs-label">The Solution</p>
+                <h2 class="cs-heading">How we<br><em>solved it</em></h2>
+                <p class="cs-body">{{ project.solution }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── RESULTS ───────────────────────────────────── -->
+<section class="cs-section cs-section--light">
+    <div class="container">
+        <div class="cs-results" scrollReveal revealFrom="up">
+            <p class="cs-label cs-label--center">Results</p>
+            <h2 class="cs-heading cs-heading--center">The impact<br><em>we delivered</em></h2>
+            <div class="cs-results__grid">
+                @for (r of project.results; track r.label; let i = $index) {
+                <div class="cs-result-card" scrollReveal revealFrom="up" [revealDelay]="i * 100">
+                    <span class="cs-result-card__metric" [style.color]="project.color">{{ r.metric }}</span>
+                    <span class="cs-result-card__label">{{ r.label }}</span>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── TAGS ──────────────────────────────────────── -->
+<section class="cs-section cs-section--gray cs-tags-section">
+    <div class="container">
+        <p class="cs-label">Technologies & Skills</p>
+        <div class="cs-tags" scrollReveal revealFrom="up">
+            @for (tag of project.tags; track tag) {
+            <span class="cs-tag">{{ tag }}</span>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ─── NEXT PROJECT ──────────────────────────────── -->
+<section class="cs-next" [style.--accent]="nextProject.color" scrollReveal revealFrom="up">
+    <div class="container">
+        <p class="cs-next__eyebrow">Next Project</p>
+        <a class="cs-next__link" [routerLink]="['/projects', nextProject.slug]">
+            <span class="cs-next__category">{{ nextProject.category }}</span>
+            <h2 class="cs-next__title">{{ nextProject.title }}</h2>
+            <span class="cs-next__arrow">→</span>
+        </a>
+    </div>
+</section>
+
+<app-footer />

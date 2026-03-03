@@ -36,6 +36,34 @@ export class SmoothScrollService implements OnDestroy {
         this.lenis?.scrollTo(target, { offset });
     }
 
+    /** Jump to top instantly on every route change.
+     *  Stops Lenis, native-scrolls to 0, then restarts Lenis so its
+     *  internal scroll position stays in sync with the window.
+     */
+    scrollToTop() {
+        if (!this.lenis) {
+            window.scrollTo(0, 0);
+            return;
+        }
+        // Stop the Lenis rAF loop temporarily
+        this.lenis.stop();
+        // Jump the native scroll position to the very top
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        // Let one frame pass so Lenis picks up the new position, then restart
+        requestAnimationFrame(() => {
+            this.lenis?.start();
+        });
+    }
+
+    /**
+     * Force Lenis to recalculate the scrollable content height.
+     * Must be called after Angular finishes rendering a new route — otherwise
+     * Lenis keeps the old page height and stops scrolling prematurely.
+     */
+    resize() {
+        this.lenis?.resize();
+    }
+
     ngOnDestroy() {
         if (this.rafId !== null) cancelAnimationFrame(this.rafId);
         this.lenis?.destroy();

@@ -158,7 +158,15 @@ $border: rgba(0, 0, 0, 0.08);
     &:hover {
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.09);
         transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
     }
+}
+
+// Make anchor version of card look the same as div
+a.proj-card {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 
 .proj-card__thumb {
@@ -235,6 +243,20 @@ $border: rgba(0, 0, 0, 0.08);
     border-radius: $radius-full;
     border: 1px solid $border;
     color: $muted;
+}
+
+.proj-card__cta {
+    display: inline-block;
+    margin-top: $space-md;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-accent;
+    letter-spacing: 0.06em;
+    transition: letter-spacing 0.2s ease;
+
+    .proj-card:hover & {
+        letter-spacing: 0.12em;
+    }
 }
 
 // ── CTA STRIP ─────────────────────────────────────────────────
