@@ -50,7 +50,7 @@ $header-light-text: #ffffff;
 // ══════════════════════════════════════════════════════════════
 // STATE: Inner light page — dark text & logo
 // ══════════════════════════════════════════════════════════════
-.site-header.is-light-page {
+.site-header.is-light-page:not(.is-menu-open) {
     color: $header-dark-text;
 
     .site-header__brand {
@@ -70,7 +70,7 @@ $header-light-text: #ffffff;
 // STATE: Scrolled — white card-style backdrop, always dark text
 // (applies on BOTH home & inner pages once user scrolls)
 // ══════════════════════════════════════════════════════════════
-.site-header.is-scrolled {
+.site-header.is-scrolled:not(.is-menu-open) {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px) saturate(180%);
     -webkit-backdrop-filter: blur(12px) saturate(180%);
@@ -88,10 +88,25 @@ $header-light-text: #ffffff;
     .site-header__toggle:hover {
         background: rgba(0, 0, 0, 0.05);
     }
+}
 
-    // Override the open-state hamburger color too
-    .site-header__toggle.is-open .hamburger__line {
-        background: $header-dark-text;
+// ══════════════════════════════════════════════════════════════
+// STATE: Menu Open — white text on dark background overlay
+// ══════════════════════════════════════════════════════════════
+.site-header.is-menu-open {
+    color: $header-light-text;
+    background: transparent;
+
+    .site-header__brand {
+        color: $header-light-text;
+    }
+
+    .hamburger__line {
+        background: $header-light-text;
+    }
+
+    .site-header__toggle:hover {
+        background: rgba(255, 255, 255, 0.08);
     }
 }
 

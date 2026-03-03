@@ -49,6 +49,7 @@ export class HeaderComponent {
             'is-scrolled': this.isScrolled(),
             'is-dark-page': this.isHomePage(),
             'is-light-page': !this.isHomePage(),
+            'is-menu-open': this.menuState.isOpen(),
         };
     }
 }
