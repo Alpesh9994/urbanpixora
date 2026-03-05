@@ -31,5 +31,5 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./pages/projects/project-detail/project-detail').then(m => m.ProjectDetailComponent)
     },
-    { path: '**', redirectTo: '' }
+    { path: '**', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFoundComponent) }
 ];

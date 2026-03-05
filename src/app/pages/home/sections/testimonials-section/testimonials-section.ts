@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, HostListener, ElementRef, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 
@@ -79,5 +79,20 @@ export class TestimonialsSectionComponent {
             (this.activeIndex + 1) % this.testimonials.length,
             'left'
         );
+    }
+    // ── Touch drag support (mobile swipe) ──────────────────────
+    private touchStartX = 0;
+    private readonly SWIPE_THRESHOLD = 50; // px
+
+    @HostListener('touchstart', ['$event'])
+    onTouchStart(e: TouchEvent) {
+        this.touchStartX = e.touches[0].clientX;
+    }
+
+    @HostListener('touchend', ['$event'])
+    onTouchEnd(e: TouchEvent) {
+        const delta = e.changedTouches[0].clientX - this.touchStartX;
+        if (Math.abs(delta) < this.SWIPE_THRESHOLD) return;
+        delta < 0 ? this.next() : this.prev();
     }
 }

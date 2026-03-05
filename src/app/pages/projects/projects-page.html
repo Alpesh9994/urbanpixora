@@ -39,7 +39,7 @@
 <!-- ─── PROJECTS GRID — LIGHT ────────────────────────── -->
 <section class="proj-grid-section">
     <div class="container">
-        <div class="proj-grid">
+        <div class="proj-grid" [class.is-animating]="isAnimating()">
             @for (proj of filteredProjects; track proj.title; let i = $index) {
             <a class="proj-card" [routerLink]="['/projects', proj.slug]" scrollReveal revealFrom="up"
                 [revealDelay]="(i % 3) * 80">

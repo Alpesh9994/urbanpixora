@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 import { FooterComponent } from '../../shared/components/footer/footer';
 import { ContactFormService } from '../../shared/services/contact-form.service';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-contact-page',
@@ -12,6 +13,7 @@ import { ContactFormService } from '../../shared/services/contact-form.service';
 })
 export class ContactPageComponent {
   private formService = inject(ContactFormService);
+  private seo = inject(SeoService);
 
   name = signal('');
   email = signal('');
@@ -21,6 +23,14 @@ export class ContactPageComponent {
   submitted = signal(false);
   loading = signal(false);
   error = signal('');
+
+  constructor() {
+    this.seo.set({
+      title: 'Get in Touch',
+      description: 'Have a project in mind? Contact UrbanPixora — we respond within 24 hours and are ready to help bring your digital vision to life.',
+      path: '/contact',
+    });
+  }
 
   onSubmit(e: Event) {
     e.preventDefault();

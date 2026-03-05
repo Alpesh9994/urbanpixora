@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 import { FooterComponent } from '../../shared/components/footer/footer';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-services-page',
@@ -10,7 +11,9 @@ import { FooterComponent } from '../../shared/components/footer/footer';
   templateUrl: './services-page.html',
   styleUrl: './services-page.scss'
 })
-export class ServicesPageComponent {
+export class ServicesPageComponent implements OnInit {
+  private seo = inject(SeoService);
+
   readonly services = [
     {
       icon: '✦', num: '01', title: 'Brand Identity',
@@ -49,4 +52,12 @@ export class ServicesPageComponent {
       deliverables: ['Art Direction', 'Campaign Concepting', 'Brand Refresh', 'Vendor Coordination', 'Creative Review'],
     },
   ];
+
+  ngOnInit() {
+    this.seo.set({
+      title: 'Our Services',
+      description: 'From brand identity and UI/UX to web development, motion design, and digital strategy — explore the full range of services UrbanPixora offers.',
+      path: '/services',
+    });
+  }
 }

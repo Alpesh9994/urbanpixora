@@ -137,6 +137,7 @@ $border: rgba(0, 0, 0, 0.08);
     display: grid;
     grid-template-columns: 1fr;
     gap: $space-lg;
+    transition: opacity 0.18s ease, transform 0.18s ease;
 
     @include respond-md {
         grid-template-columns: repeat(2, 1fr);
@@ -144,6 +145,13 @@ $border: rgba(0, 0, 0, 0.08);
 
     @include respond-lg {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    // Applied briefly when switching filter tabs
+    &.is-animating {
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
     }
 }
 

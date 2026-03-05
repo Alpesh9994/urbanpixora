@@ -22,6 +22,10 @@ export class IntroSectionComponent implements AfterViewInit, OnDestroy {
     private currentFrame = -1;
     private ctx!: CanvasRenderingContext2D;
 
+    // Cached canvas dimensions — updated only on resize, never on scroll
+    private cachedW = 0;
+    private cachedH = 0;
+
     private rafPending = false;
     private scrollHandler?: () => void;
     private resizeObserver?: ResizeObserver;
@@ -37,7 +41,7 @@ export class IntroSectionComponent implements AfterViewInit, OnDestroy {
     private preloadImages() {
         for (let i = 0; i < this.frameCount; i++) {
             const img = new Image();
-            img.src = `/who-we-are-sequence/frame-${i + this.startFrameOffset}.png`;
+            img.src = `/who-we-are-sequence/frame-${i + this.startFrameOffset}.webp`;
             this.images.push(img);
         }
     }
@@ -67,11 +71,22 @@ export class IntroSectionComponent implements AfterViewInit, OnDestroy {
 
             // Re-render current frame on any canvas resize (fixes blank after nav / resize)
             this.resizeObserver = new ResizeObserver(() => {
+                // Update cached bounds on resize (not on scroll)
+                const bounds = canvas.getBoundingClientRect();
+                this.cachedW = bounds.width;
+                this.cachedH = bounds.height;
                 if (this.currentFrame >= 0) {
                     this.renderFrame(this.currentFrame);
                 }
             });
             this.resizeObserver.observe(canvas);
+
+            // Capture initial bounds after first render
+            requestAnimationFrame(() => {
+                const bounds = canvas.getBoundingClientRect();
+                this.cachedW = bounds.width;
+                this.cachedH = bounds.height;
+            });
 
             this.onScroll(); // bootstrap
         });
@@ -132,12 +147,14 @@ export class IntroSectionComponent implements AfterViewInit, OnDestroy {
         if (!img || img.width === 0 || img.height === 0) return;
 
         const dpr = window.devicePixelRatio || 1;
-        const bounds = canvas.getBoundingClientRect();
+        // Use cached bounds — avoids getBoundingClientRect() on every scroll
+        const cw = this.cachedW;
+        const ch = this.cachedH;
 
-        if (bounds.width === 0 || bounds.height === 0) return;
+        if (cw === 0 || ch === 0) return;
 
-        const tw = Math.round(bounds.width * dpr);
-        const th = Math.round(bounds.height * dpr);
+        const tw = Math.round(cw * dpr);
+        const th = Math.round(ch * dpr);
 
         if (canvas.width !== tw || canvas.height !== th) {
             canvas.width = tw;

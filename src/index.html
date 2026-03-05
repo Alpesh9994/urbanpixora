@@ -1,17 +1,60 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>UrbanpixoraNew</title>
+  <!-- Primary SEO — Angular SeoService overrides these on each route -->
+  <title>UrbanPixora — Digital Design Studio</title>
+  <meta name="description"
+    content="UrbanPixora is a digital design studio crafting bold brand identities, UI/UX designs, and web experiences that deliver results.">
+
+  <!-- Open Graph defaults (Angular updates these per-page) -->
+  <meta property="og:title" content="UrbanPixora — Digital Design Studio">
+  <meta property="og:description"
+    content="UrbanPixora is a digital design studio crafting bold brand identities, UI/UX designs, and web experiences that deliver results.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://urbanpixora.com">
+  <meta property="og:image" content="https://urbanpixora.com/who-we-are.webp">
+  <meta property="og:site_name" content="UrbanPixora">
+
+  <!-- Twitter Card defaults -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UrbanPixora — Digital Design Studio">
+  <meta name="twitter:description"
+    content="UrbanPixora is a digital design studio crafting bold brand identities, UI/UX designs, and web experiences that deliver results.">
+  <meta name="twitter:image" content="https://urbanpixora.com/who-we-are.webp">
+
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- ── Fonts ─────────────────────────────────────────────────
+       Non-blocking: preconnect first, then load with media="print"
+       trick so fonts never block the first paint.
+  ──────────────────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--
+    Load font asynchronously: start with media="print" so browser
+    downloads it without blocking render, then swap to "all" on load.
+  -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+  </noscript>
+
+  <!-- ── LCP Preload ───────────────────────────────────────────
+       The first frame of the scroll-scrubbed sequence is likely
+       the Largest Contentful Paint on mobile. Preloading it
+       tells the browser to fetch it at the highest priority.
+  ──────────────────────────────────────────────────────────── -->
+  <link rel="preload" as="image" href="/who-we-are-sequence/frame-1.webp" fetchpriority="high">
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>
