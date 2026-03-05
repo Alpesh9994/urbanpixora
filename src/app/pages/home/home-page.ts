@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { HeroComponent } from '../../shared/components/hero/hero';
 import { IntroSectionComponent } from './sections/intro-section/intro-section';
 import { ServicesSectionComponent } from './sections/services-section/services-section';
@@ -9,6 +9,7 @@ import { TestimonialsSectionComponent } from './sections/testimonials-section/te
 import { CtaSectionComponent } from './sections/cta-section/cta-section';
 import { FooterComponent } from '../../shared/components/footer/footer';
 import { SeoService } from '../../shared/services/seo.service';
+import { CmsService, CmsPage, CmsSection } from '../../shared/services/cms.service';
 
 @Component({
   selector: 'app-home-page',
@@ -25,25 +26,43 @@ import { SeoService } from '../../shared/services/seo.service';
     FooterComponent,
   ],
   template: `
-    <app-hero />
-    <app-intro-section />
-    <app-services-section />
-    <app-projects-section />
-    <app-stats-section />
-    <app-team-section />
-    <app-testimonials-section />
-    <app-cta-section />
-    <app-footer />
+    @if (pageData()) {
+      <app-hero [data]="getSection('hero')" />
+      <app-intro-section />
+      <app-services-section [data]="getSection('services')" />
+      <app-projects-section [data]="getSection('portfolio')" />
+      <app-stats-section />
+      <app-team-section />
+      <app-testimonials-section [data]="getSection('testimonials')" />
+      <app-cta-section [data]="getSection('cta')" />
+      <app-footer />
+    } @else {
+      <div class="loading-state">Loading...</div>
+    }
   `
 })
 export class HomePageComponent implements OnInit {
   private seo = inject(SeoService);
+  private cms = inject(CmsService);
+
+  pageData = signal<CmsPage | null>(null);
 
   ngOnInit() {
-    this.seo.set({
-      title: 'UrbanPixora — Digital Design Studio',
-      description: 'UrbanPixora is a digital design studio crafting bold brand identities, UI/UX designs, and web experiences that stand out and deliver results.',
-      path: '/',
+    this.cms.getPage('home').subscribe({
+      next: (data) => {
+        this.pageData.set(data);
+        this.seo.set({
+          title: data.meta_title || data.title,
+          description: data.meta_description || '',
+          path: '/',
+        });
+      },
+      error: (err) => console.error('Failed to load home page data', err)
     });
+  }
+
+  getSection(type: string): CmsSection | undefined {
+    const page = this.pageData();
+    return page ? this.cms.getSection(page, type) : undefined;
   }
 }

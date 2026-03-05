@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
+import { CmsSection } from '../../../../shared/services/cms.service';
 
 @Component({
     selector: 'app-cta-section',
@@ -9,4 +10,6 @@ import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reve
     templateUrl: './cta-section.html',
     styleUrl: './cta-section.scss'
 })
-export class CtaSectionComponent { }
+export class CtaSectionComponent {
+    @Input() data: CmsSection | undefined;
+}

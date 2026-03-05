@@ -1,6 +1,7 @@
-import { Component, signal, HostListener, ElementRef, inject } from '@angular/core';
+import { Component, signal, HostListener, Input, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
+import { CmsSection } from '../../../../shared/services/cms.service';
 
 @Component({
     selector: 'app-testimonials-section',
@@ -10,26 +11,30 @@ import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reve
     styleUrl: './testimonials-section.scss',
 })
 export class TestimonialsSectionComponent {
-    readonly testimonials = [
-        {
-            quote: 'UrbanPixora transformed our digital identity from the ground up. The results exceeded every expectation — our conversions doubled in 3 months.',
-            name: 'Arjun Mehta',
-            role: 'CEO, Luminary Studio',
-            initials: 'AM'
-        },
-        {
-            quote: 'Their team\'s ability to blend strategy with stunning visuals is unmatched. Every pixel felt intentional and purposeful.',
-            name: 'Priya Sharma',
-            role: 'Head of Product, Nexus SaaS',
-            initials: 'PS'
-        },
-        {
-            quote: 'Working with UrbanPixora felt like having a world-class creative team embedded in our startup. Fast, brilliant, and deeply collaborative.',
-            name: 'Rahul Desai',
-            role: 'Founder, Vantage Fintech',
-            initials: 'RD'
-        },
-    ];
+    @Input() data: CmsSection | undefined;
+
+    get testimonials() {
+        return this.data?.items || [
+            {
+                quote: 'UrbanPixora transformed our digital identity from the ground up. The results exceeded every expectation — our conversions doubled in 3 months.',
+                name: 'Arjun Mehta',
+                role: 'CEO, Luminary Studio',
+                initials: 'AM'
+            },
+            {
+                quote: 'Their team\'s ability to blend strategy with stunning visuals is unmatched. Every pixel felt intentional and purposeful.',
+                name: 'Priya Sharma',
+                role: 'Head of Product, Nexus SaaS',
+                initials: 'PS'
+            },
+            {
+                quote: 'Working with UrbanPixora felt like having a world-class creative team embedded in our startup. Fast, brilliant, and deeply collaborative.',
+                name: 'Rahul Desai',
+                role: 'Founder, Vantage Fintech',
+                initials: 'RD'
+            },
+        ];
+    }
 
     activeIndex = 0;
 

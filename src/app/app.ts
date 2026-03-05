@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './shared/components/header/header';
@@ -16,41 +16,54 @@ import { routeTransitionAnimations } from './shared/animations/route-animations'
   animations: [routeTransitionAnimations]
 })
 export class App implements OnInit {
+  isAdminRoute = signal(false);
+
   constructor(
     private smoothScroll: SmoothScrollService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.smoothScroll.init();
-
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)
-    ).subscribe(() => {
-      // 1. Jump to top immediately
+    ).subscribe((e: NavigationEnd) => {
+      const admin = e.urlAfterRedirects.startsWith('/admin');
+      this.isAdminRoute.set(admin);
+
+      if (admin) {
+        // Destroy Lenis so the admin panel uses native browser scroll
+        this.smoothScroll.destroy();
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        return;
+      }
+
+      // Public site: ensure Lenis is running
+      this.smoothScroll.init();
       this.smoothScroll.scrollToTop();
 
-      // 2. After Angular has finished rendering the new route components,
-      //    tell Lenis to recalculate the page's scrollable height.
-      //    Without this, Lenis uses the old page height and scroll gets stuck.
-      //
-      //    We use two nested rAFs + a small timeout to guarantee we run
-      //    AFTER Angular's full rendering cycle (including scroll-reveal
-      //    and any lazy-loaded images that affect layout).
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           this.smoothScroll.resize();
-          // Belt-and-braces: also resize after images / fonts may have loaded
           setTimeout(() => this.smoothScroll.resize(), 300);
         });
       });
     });
+
+    // Check on first load (before any navigation event)
+    const initialUrl = this.router.url;
+    if (initialUrl.startsWith('/admin')) {
+      this.isAdminRoute.set(true);
+      this.smoothScroll.destroy();
+    } else {
+      this.smoothScroll.init();
+    }
   }
 
   getRouteAnimationData(outlet: RouterOutlet) {
-    // Return a unique string for each route so the * <=> * transition always fires
     return outlet && outlet.activatedRouteData && outlet.isActivated
       ? outlet.activatedRoute.snapshot.url.join('/')
       : null;
   }
 }
+

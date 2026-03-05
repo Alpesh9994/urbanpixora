@@ -1,44 +1,50 @@
 <section class="testimonials-section">
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-5" scrollReveal revealFrom="left">
-                <span class="section-tag">Client Love</span>
-                <h2 class="section-heading">What People<br><em>Say About Us</em></h2>
+        <div class="row" scrollReveal revealFrom="left">
+            <div class="col-12 col-lg-5 mb-5 mb-lg-0 pb-5 pb-lg-0">
+                <span class="section-tag">{{ data?.fields?.['subtitle'] || 'Client Voices' }}</span>
+                <h2 class="section-heading"
+                    [innerHTML]="data?.fields?.['title'] || 'Words From Our<br><em>Partners</em>'"></h2>
+                <p class="section-intro mt-4" style="color: rgba(255,255,255,0.6); line-height: 1.8;">
+                    {{ data?.fields?.['description'] || 'Don\'t just take our word for it. Hear from the visionary
+                    founders and marketing leaders who trusted us with their brands.' }}
+                </p>
             </div>
-        </div>
 
-        <div class="testimonial-stage">
-
-            <!-- Card frame stays fixed — only content slides/fades -->
-            <div class="testimonial-card">
-                <div class="testimonial-card__content" [ngClass]="animState()">
-
-                    <div class="testimonial-card__quote-mark">"</div>
-
-                    <p class="testimonial-card__text">{{ testimonials[activeIndex].quote }}</p>
-
-                    <div class="testimonial-card__footer">
-                        <div class="testimonial-card__avatar">{{ testimonials[activeIndex].initials }}</div>
-                        <div class="testimonial-card__info">
-                            <p class="testimonial-card__name">{{ testimonials[activeIndex].name }}</p>
-                            <p class="testimonial-card__role">{{ testimonials[activeIndex].role }}</p>
+            <!-- Slider side -->
+            <div class="col-12 col-lg-6 offset-lg-1">
+                <div class="testimonial-stage pointer-grab">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__content" [ngClass]="animState()">
+                            <div class="testimonial-card__quote-mark">"</div>
+                            <p class="testimonial-card__text">{{ testimonials[activeIndex]['quote'] }}</p>
+                            <div class="testimonial-card__footer mt-4">
+                                <div class="testimonial-card__avatar">{{ testimonials[activeIndex]['initials'] ||
+                                    testimonials[activeIndex]['name']?.charAt(0) }}</div>
+                                <div>
+                                    <h4 class="testimonial-card__name">{{ testimonials[activeIndex]['name'] }}</h4>
+                                    <p class="testimonial-card__role">{{ testimonials[activeIndex]['role'] }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Controls -->
+                    <div class="testimonial-controls" scrollReveal revealFrom="right" [revealDelay]="150">
+                        <button class="btn-circle"
+                            style="background:none; border: 1px solid rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%; color: white; transition: all 0.3s;"
+                            (click)="prev()" aria-label="Previous testimonial">←</button>
+                        <div class="testimonial-dots">
+                            @for (t of testimonials; track $index) {
+                            <span class="testimonial-dot" [class.is-active]="$index === activeIndex"></span>
+                            }
+                        </div>
+                        <button class="btn-circle"
+                            style="background:none; border: 1px solid rgba(255,255,255,0.1); width: 44px; height: 44px; border-radius: 50%; color: white; transition: all 0.3s;"
+                            (click)="next()" aria-label="Next testimonial">→</button>
+                    </div>
                 </div>
             </div>
-
-            <!-- Controls -->
-            <div class="testimonial-controls" scrollReveal revealFrom="right" [revealDelay]="150">
-                <button class="btn-circle" (click)="prev()" aria-label="Previous testimonial">←</button>
-                <div class="testimonial-dots">
-                    @for (t of testimonials; track $index) {
-                    <span class="testimonial-dot" [class.is-active]="$index === activeIndex"></span>
-                    }
-                </div>
-                <button class="btn-circle" (click)="next()" aria-label="Next testimonial">→</button>
-            </div>
-
         </div>
     </div>
 </section>

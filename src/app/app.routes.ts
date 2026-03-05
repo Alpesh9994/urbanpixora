@@ -31,5 +31,9 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./pages/projects/project-detail/project-detail').then(m => m.ProjectDetailComponent)
     },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.routes').then(m => m.adminRoutes)
+    },
     { path: '**', loadComponent: () => import('./pages/not-found/not-found').then(m => m.NotFoundComponent) }
 ];

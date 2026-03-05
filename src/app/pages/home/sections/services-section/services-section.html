@@ -20,26 +20,26 @@
         <!-- Header -->
         <div class="row" scrollReveal revealFrom="left">
             <div class="col-lg-6">
-                <span class="services-section__label">What We Do</span>
-                <h2 class="services-section__heading">
-                    Building <em>Digital</em><br>Experiences
+                <span class="services-section__label">{{ data?.fields?.['subtitle'] || 'What We Do' }}</span>
+                <h2 class="services-section__heading"
+                    [innerHTML]="data?.fields?.['title'] || 'Building <em>Digital</em><br>Experiences'">
                 </h2>
             </div>
             <div class="col-lg-5 offset-lg-1 d-flex align-items-end pb-4">
                 <p class="services-section__intro">
-                    From brand identity to full-stack development, we cover the entire
-                    digital product spectrum with precision and care.
+                    {{ data?.fields?.['description'] || 'From brand identity to full-stack development, we cover the
+                    entire digital product spectrum with precision and care.' }}
                 </p>
             </div>
         </div>
 
         <!-- Cards -->
         <div class="services-grid">
-            @for (service of services; track service.title; let i = $index) {
+            @for (service of services; track service['title']; let i = $index) {
             <div class="service-card" scrollReveal revealFrom="up" [revealDelay]="i * 60">
-                <div class="service-card__icon-wrap">{{ service.icon }}</div>
-                <h3 class="service-card__title">{{ service.title }}</h3>
-                <p class="service-card__desc">{{ service.desc }}</p>
+                <div class="service-card__icon-wrap">{{ service['icon'] }}</div>
+                <h3 class="service-card__title">{{ service['title'] }}</h3>
+                <p class="service-card__desc">{{ service['desc'] }}</p>
                 <div class="service-card__bar"></div>
             </div>
             }

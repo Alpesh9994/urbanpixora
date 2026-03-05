@@ -48,27 +48,36 @@
         <div class="hero__content">
 
             <h1 class="hero__heading">
-                <span class="hero__heading--bold">Designing a Stage</span><br>
-                <span class="hero__heading--light">for Your </span><span class="hero__heading--bold">Brand's
-                    Story</span>
+                @if (data?.fields?.['title']) {
+                    {{ data?.fields?.['title'] }}
+                } @else {
+                    <span class="hero__heading--bold">Designing a Stage</span><br>
+                    <span class="hero__heading--light">for Your </span><span class="hero__heading--bold">Brand's Story</span>
+                }
             </h1>
 
             <p class="hero__sub">
-                Brands need a great product and a compelling marketing strategy to
-                truly succeed. You have a perfect product, we have a perfect
-                marketing way. Together, we can design a stage for your target
-                audience to showcase your brand's unique story.
+                {{ data?.fields?.['description'] || "Brands need a great product and a compelling marketing strategy to truly succeed. You have a perfect product, we have a perfect marketing way. Together, we can design a stage for your target audience to showcase your brand's unique story." }}
             </p>
 
             <div class="hero__actions">
-                <a class="hero__btn btn-primary" routerLink="/contact">
-                    <span>Get a Call Back</span>
-                    <span class="hero__btn-arrow">→</span>
-                </a>
-                <a class="hero__btn btn-outline" routerLink="/work">
-                    <span>What We Do</span>
-                    <span class="hero__btn-arrow">→</span>
-                </a>
+                @if (data?.items && data?.items?.length) {
+                    @for (btn of data?.items; track btn['url']) {
+                        <a class="hero__btn" [class.btn-primary]="btn['style'] === 'primary'" [class.btn-outline]="btn['style'] === 'secondary'" [routerLink]="btn['url']">
+                            <span>{{ btn['label'] }}</span>
+                            <span class="hero__btn-arrow">→</span>
+                        </a>
+                    }
+                } @else {
+                    <a class="hero__btn btn-primary" routerLink="/contact">
+                        <span>Get a Call Back</span>
+                        <span class="hero__btn-arrow">→</span>
+                    </a>
+                    <a class="hero__btn btn-outline" routerLink="/projects">
+                        <span>What We Do</span>
+                        <span class="hero__btn-arrow">→</span>
+                    </a>
+                }
             </div>
 
         </div>

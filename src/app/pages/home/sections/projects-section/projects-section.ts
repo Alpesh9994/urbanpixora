@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import { ProjectsDataService } from '../../../../shared/services/projects-data.service';
+import { CmsSection } from '../../../../shared/services/cms.service';
 
 @Component({
     selector: 'app-projects-section',
@@ -11,6 +12,7 @@ import { ProjectsDataService } from '../../../../shared/services/projects-data.s
     styleUrl: './projects-section.scss'
 })
 export class ProjectsSectionComponent {
+    @Input() data: CmsSection | undefined;
     private projectsData = inject(ProjectsDataService);
 
     // Show the first 4 projects from the shared data service

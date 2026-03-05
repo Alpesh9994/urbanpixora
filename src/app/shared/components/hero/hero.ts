@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CmsSection } from '../../services/cms.service';
 
 @Component({
     selector: 'app-hero',
@@ -8,4 +9,6 @@ import { RouterLink } from '@angular/router';
     templateUrl: './hero.html',
     styleUrl: './hero.scss'
 })
-export class HeroComponent { }
+export class HeroComponent {
+    @Input() data: CmsSection | undefined;
+}

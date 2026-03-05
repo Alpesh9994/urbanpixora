@@ -83,9 +83,9 @@
     color: $color-text;
     white-space: normal; // wraps on mobile
 
-    @include respond-lg {
-        white-space: nowrap;
-    }
+    // @include respond-lg {
+    //     white-space: nowrap;
+    // }
 
     &--bold {
         font-weight: $font-weight-bold;

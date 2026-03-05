@@ -64,6 +64,16 @@ export class SmoothScrollService implements OnDestroy {
         this.lenis?.resize();
     }
 
+    /** Stop and destroy Lenis (e.g. for admin pages that need native scroll) */
+    destroy() {
+        if (this.rafId !== null) {
+            cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+        }
+        this.lenis?.destroy();
+        this.lenis = null;
+    }
+
     ngOnDestroy() {
         if (this.rafId !== null) cancelAnimationFrame(this.rafId);
         this.lenis?.destroy();
